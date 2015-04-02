@@ -1,0 +1,30 @@
+div.splash-nav {
+	display: table;
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+	height: 100px;
+}
+div.splash-nav div.splash-nav-item {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+}
+div.splash-nav div.splash-nav-item:last-child {
+	text-align: right;
+}
+
+div.splash-nav div.splash-nav-item a.logo {
+	display: block;
+	height: 80px;
+	width: 118px;
+	background-image: url(<%= asset_path 'logo.png' %>);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 118px 80px;
+}
+
+div.splash-nav div.splash-nav-item input.nav-input {
+	display: inherit;
+	width: inherit;
+}

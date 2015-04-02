@@ -1,33 +1,110 @@
-<% if user_table %>
-<%= form_for @user,url: root_url do |f| %>
-  
+<div class="signup-header"><h1>Sign Up</h1></div>
+<div class="signup-section">
 
-  <% if @user.errors.any? %>
-	  
-  	<% @user.errors.full_messages.each do |message| %>
+  <div class="signup-left">
 
-  		<alert type="danger"><%= message %></alert>
+    <% if @user.errors.any? %>
+      <input type="hidden" ng:init="validators.submitted = true; validateSignup()" />
+    <% end %>
 
-  	<% end %>
+    <alert type="danger forever" ng:if="!validators.clean">
+      <ul>
+        <li ng:repeat="(field,item) in validators" ng:if="item.e && (field != 'submitting' || field != 'clean')">{{item.m}}</li>
+      </ul>
+    </alert>
 
-  <% end %>
+    <%= form_for @user,url: root_url,html: {'onsubmit' => 'return false'} do |f| %>
 
+    <div class="form-group" ng:class="{'has-error':validators.name.e}">
+      <%= f.text_field :name,class: 'form-control',placeholder: 'Full Name','ng:model' => 'signup.name','ng:init' => "signup.name = '#{@user.name}'" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.text_field :email,class: 'form-control',placeholder: 'Email' %>
+    <div class="form-group" ng:class="{'has-error':validators.email.e}">
+      <%= f.text_field :email,class: 'form-control',placeholder: 'Email','ng:model' => 'signup.email','ng:init' => "signup.email = '#{@user.email}'" %>
+    </div>
+
+    <div class="form-group" ng:class="{'has-error':validators.password.e}">
+      <%= f.password_field :password,class: 'form-control',placeholder: 'New Password','ng:model' => 'signup.password' %>
+    </div>
+
+    <div class="signup-bdayinfo">
+
+      <div class="signup-bdayinfo-item">
+
+        <h3>Birthdate</h3>
+        <div class="form-group" ng:class="{'has-error':validators.birth_month.e}">
+
+          <select class="form-control" ng:model="month"<% if !@user.birth_month.nil? %> ng:init="month = months[<%= @user.birth_month.to_i %>]; signup.birth_month = month.number"<% end %> ng:change="signup.birth_month = month.number" ng:options="opt.long for opt in months">
+            <option value="">Month</option>
+          </select>
+
+        </div>
+
+      </div>
+      <div class="signup-bdayinfo-item" ng:class="{'has-error':validators.birth_date.e}">
+
+        <h3>&nbsp;</h3>
+        <div class="form-group">
+
+          <select class="form-control" ng:model="signup.birth_date"<% if !@user.birth_date.nil? %> ng:init="signup.birth_date = <%= 31.times.to_a.drop(1).push(31).to_json %>[<%= (@user.birth_date.to_i-1) %>]"<% end %> ng:options="opt for opt in <%= 31.times.to_a.drop(1).push(31).to_json %>">
+            <option value="">Day</option>
+          </select>
+
+        </div>
+
+      </div>
+      <div class="signup-bdayinfo-item" ng:class="{'has-error':validators.birth_year.e}">
+
+        <h3>&nbsp;</h3>
+        <div class="form-group">
+
+          <%= f.select :birth_year,options_for_select(((Time.now.year-100)..Time.now.year).to_a.reverse,@user.birth_year),{},class: 'form-control','ng:model' => 'signup.birth_year','ng:init' => "signup.birth_year = #{@user.birth_year || Time.now.year}" %>
+
+        </div>
+
+      </div>
+      <div class="signup-bdayinfo-item">
+
+        <h3>Gender</h3>
+        <div class="btn-group" ng:init="signup.gender = '<%= @user.gender %>'">
+          <label class="btn" ng:class="{'btn-default':!validators.gender.e,'btn-danger':validators.gender.e}" ng:model="signup.gender" btn-radio="'male'">Male</label>
+          <label class="btn" ng:class="{'btn-default':!validators.gender.e,'btn-danger':validators.gender.e}" ng:model="signup.gender" btn-radio="'female'">Female</label>
+        </div>
+
+        <%= f.hidden_field :gender,value: "{{signup.gender}}" %>
+
+      </div>
+
+    </div>
+
+    <%= f.submit 'Sign Up!',class: 'btn btn-primary btn-lg','ng:click' => 'submitSignup()' %>
+
+    <% end %>
+
+    <%= form_for @user,url: root_url,html: {id: 'hidden-signup-form'} do |f| %>
+
+      <input type="hidden" ng:repeat="(field,value) in signup" name="user[{{field}}]" value="{{value}}" />
+
+    <% end %>
+
+  </div>
+  <div class="signup-right">
+
+    <h2>Bringing continuity and collaboration together to help make the internet a safer place to interact with others!</h2>
+
+    <p>
+      <%= image_tag 'icon-splash-1.png' %>
+      Search for people who move in next door, apply for a job, etc.
+    </p>
+    <p>
+      <%= image_tag 'icon-splash-2.png' %>
+      Read & write reviews on dating sites & social media platforms!
+    </p>
+    <p>
+      <%= image_tag 'icon-splash-3.png' %>
+      View public records & emplyment history with ease!
+    </p>
+
   </div>
 
-  <div class="form-group">
-    <%= f.password_field :password,class: 'form-control',placeholder: 'Password' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.password_field :password_confirmation,class: 'form-control',placeholder: 'Confirm Password' %>
-  </div>
-
-  <%= f.submit 'Sign Up',class: 'btn btn-default' %>
-
-
-<% end %>
-<%= link_to "Log In", login_path %>
-<% end %>
+</div>

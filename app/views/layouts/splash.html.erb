@@ -1,22 +1,54 @@
 <!DOCTYPE html>
 <html ng:app="App" ng:controller="Ctrl">
 <head>
-  <title><%= TITLE %></title>
-  <%= stylesheet_link_tag    'splash' %>
-  <%= javascript_include_tag 'splash' %>
-  <%= csrf_meta_tags %>
+	<link rel="shortcut icon" href="<%= asset_path 'logo.png' %>" />
+	<title><%= TITLE %></title>
+	<%= stylesheet_link_tag    'splash' %>
+	<%= javascript_include_tag 'splash' %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
 
-	<% flash.each do |type,message| %>
-		<alert type="<%= type %>"><%= message %></alert>
-	<% end %>
+	<div class="header">
 
-	<% if user_table %>
-		<%= yield %>
-	<% else %>
-		<alert class="forever">User table missing. Please run 'rake db:migrate'.</alert>
-	<% end %>
+		<div class="container">
+
+			<div class="splash-nav">
+
+				<div class="splash-nav-item">
+					<a href="/" class="logo"></a>
+				</div>
+				<div class="splash-nav-item">
+					
+					<%= form_tag login_path,class: 'form-inline' do |f| %>
+
+					<div class="form-group"><%= text_field_tag :email,nil,class: 'form-control',placeholder: 'Email' %></div>
+					<div class="form-group"><%= password_field_tag :password,nil,class: 'form-control',placeholder: 'Password' %></div>
+					<%= submit_tag 'Log In',class: 'btn btn-primary' %>
+
+					<% end %>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="body">
+
+		<div class="container">
+
+			<% flash.each do |type,message| %>
+				<alert type="<%= type %>"><%= message %></alert>
+			<% end %>
+
+			<%= yield %>
+
+		</div>
+
+	</div>
 
 </body>
 </html>

@@ -9,7 +9,7 @@ $('document').ready(function(){
 
 			$(e).slideUp();
 
-		},(3000+(i*600)));
+		},3000);//(3000+(i*600)));
 
 		i++;
 
@@ -87,3 +87,106 @@ Array.prototype.contains = function(key,val){
 
     return has;
 }
+Array.prototype.times = function(n){
+
+	var tmp = [];
+
+    for (i = 0; i < n; i++) {
+    	tmp.push(i);
+    }
+
+    return tmp;
+}
+
+var months = [
+	{
+		number: 0,
+		short: 'Jan',
+		long: 'January'
+	},
+	{
+		number: 1,
+		short: 'Feb',
+		long: 'Febuary'
+	},
+	{
+		number: 2,
+		short: 'Mar',
+		long: 'March'
+	},
+	{
+		number: 3,
+		short: 'Apr',
+		long: 'April'
+	},
+	{
+		number: 4,
+		short: 'May',
+		long: 'May'
+	},
+	{
+		number: 5,
+		short: 'Jun',
+		long: 'June'
+	},
+	{
+		number: 6,
+		short: 'Jul',
+		long: 'July'
+	},
+	{
+		number: 7,
+		short: 'Aug',
+		long: 'August'
+	},
+	{
+		number: 8,
+		short: 'Sept',
+		long: 'September'
+	},
+	{
+		number: 9,
+		short: 'Oct',
+		long: 'October'
+	},
+	{
+		number: 10,
+		short: 'Nov',
+		long: 'November'
+	},
+	{
+		number: 11,
+		short: 'Dec',
+		long: 'December'
+	}
+];
+var days = [
+	{
+		short: 'Sun',
+		long: 'Sunday'
+	},
+	{
+		short: 'Mon',
+		long: 'Monday'
+	},
+	{
+		short: 'Tues',
+		long: 'Tuesday'
+	},
+	{
+		short: 'Wed',
+		long: 'Wednesday'
+	},
+	{
+		short: 'Thurs',
+		long: 'Thursday'
+	},
+	{
+		short: 'Fri',
+		long: 'Friday'
+	},
+	{
+		short: 'Sat',
+		long: 'Saturday'
+	}
+];
