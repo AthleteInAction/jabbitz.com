@@ -119,18 +119,18 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				api_module.loading[field] = 1;
 
 				Item.$save(options,function(data){
-
+					JP(data);
 					api_module.x876[field] = new_value;
 
-					api_module.loading[field] = 2;
-					$timeout(function(){
-						delete api_module.loading[field];
-					},2000);
+					// api_module.loading[field] = 2;
+					// $timeout(function(){
+					// 	delete api_module.loading[field];
+					// },2000);
 
 					if (complete){complete(data.user,false);}
 
 				},function(data){
-					JP(data);
+					JP({e:data});
 					api_module.loading[field] = 3;
 
 					if (complete){complete(data,true);}
