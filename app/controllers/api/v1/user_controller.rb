@@ -38,7 +38,7 @@ module Api
   		# =================================================
   		# =================================================
   		def update
-        sleep 1
+        
   			@user = User.find params[:id]
 
         if @user.update_attributes(params[:user])
