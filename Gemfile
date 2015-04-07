@@ -51,7 +51,7 @@ group :production,:staging do
 
   gem 'rails_12factor'
 
-  # gem 'puma'
+  gem 'puma'
 
   gem 'mysql2'
   
