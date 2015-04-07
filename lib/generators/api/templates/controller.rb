@@ -40,7 +40,7 @@ module Api
 
         if @<%= name %>.update(<%= name %>_params)
 
-          render json: @<%= name %>,status: 200
+          render json: @<%= name %>,status: :ok
 
         else
 
@@ -62,7 +62,7 @@ module Api
 
   			if @<%= name %>.save
 
-  				render json: @<%= name %>,status: 201
+  				render json: @<%= name %>,status: :created
 
   			else
 

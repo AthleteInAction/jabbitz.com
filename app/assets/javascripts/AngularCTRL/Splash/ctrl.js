@@ -37,30 +37,6 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 				m: 'Password must be bewteen 6 and 20 characters.',
 				v: function(value){return this.r.test(value);},
 				z: false
-			},
-			gender: {
-				r: /^male$|^female$/i,
-				m: 'Please select a gender.',
-				v: function(value){return this.r.test(value);},
-				z: false
-			},
-			birth_month: {
-				r: /^.{1,}$/,
-				m: 'Please select birthdate month.',
-				v: function(value){return this.r.test(value);},
-				z: false
-			},
-			birth_date: {
-				r: /^.{1,}$/,
-				m: 'Please select birthdate day.',
-				v: function(value){return this.r.test(value);},
-				z: false
-			},
-			birth_year: {
-				r: /^.{1,}$/,
-				m: 'Please select birthdate year.',
-				v: function(value){return this.r.test(value);},
-				z: false
 			}
 		};
 
