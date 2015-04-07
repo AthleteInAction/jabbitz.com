@@ -102,7 +102,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def <%= name %>_params
-        params.require(:<%= name %>).permit 
+        params.require(:<%= name %>).permit :created_at, :updated_at
       end
 
   	end

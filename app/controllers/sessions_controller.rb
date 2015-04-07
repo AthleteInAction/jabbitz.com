@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
 			session[:user_id] = user.id
 
-			redirect_to root_url, flash: {success: 'Logged in!'}
+			redirect_to root_url, flash: {success: "Welcome #{params[:email]}!"}
 
 		else
 

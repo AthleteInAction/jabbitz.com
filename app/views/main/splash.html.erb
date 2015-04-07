@@ -34,7 +34,7 @@
         <h3>Birthdate</h3>
         <div class="form-group" ng:class="{'has-error':validators.birth_month.e}">
 
-          <select class="form-control" ng:model="month"<% if !@user.birth_month.nil? %> ng:init="month = months[<%= @user.birth_month.to_i %>]; signup.birth_month = month.number"<% end %> ng:change="signup.birth_month = month.number" ng:options="opt.long for opt in months">
+          <select class="form-control" ng:model="month"<% if !@user.birth_month.nil? %> ng:init="month = months[<%= @user.birth_month.to_i-1 %>]; signup.birth_month = month.number"<% end %> ng:change="signup.birth_month = month.number+1" ng:options="opt.long for opt in months">
             <option value="">Month</option>
           </select>
 

@@ -19,7 +19,7 @@
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="Full Name" />
 				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
-					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2}"></div>
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
 
@@ -27,7 +27,7 @@
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="Email" />
 				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
-					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2}"></div>
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
 
@@ -35,15 +35,51 @@
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="Phone Number" />
 				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
-					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2}"></div>
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
+			</div>
+
+			<label>Birthdate:</label>
+			<div class="form-group callback">
+				<div class="table-div">
+					<% field = 'birth_month' %>
+					<div class="table-div-item" ng:init="month = months[current_user.<%= field %>-1]">
+						<select class="form-control" ng:model="month" ng:options="opt.long for opt in months" ng:change="current_user.<%= field %> = month.number+1;current_user.update('<%= field %>',current_user.<%= field %>)">
+							<option value="" ng:if="!current_user.<%= field %>">Month</option>
+						</select>
+					</div>
+					<% field = 'birth_date' %>
+					<div class="table-div-item">
+						<select class="form-control" ng:model="current_user.<%= field %>" ng:options="opt for opt in <%= 31.times.to_a.drop(1).push(31).to_json %>" ng:change="current_user.update('<%= field %>',current_user.<%= field %>)">
+							<option value="" ng:if="!current_user.<%= field %>">Day</option>
+						</select>
+					</div>
+					<% field = 'birth_year' %>
+					<div class="table-div-item">
+						<%= select_tag 'birth_year',options_for_select(((Time.now.year-100)..Time.now.year).to_a.reverse),class: 'form-control','ng:model' => 'current_user.birth_year','ng:change' => "current_user.update('birth_year',current_user.birth_year)" %>
+					</div>
+				</div>
+
+				<% field = 'birth_month' %>
+				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
+				</div>
+				<% field = 'birth_date' %>
+				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
+				</div>
+				<% field = 'birth_year' %>
+				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
+				</div>
+
 			</div>
 
 			<% field = 'address' %>
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="Address" />
 				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
-					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2}"></div>
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
 
@@ -51,7 +87,7 @@
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="City" />
 				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
-					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2}"></div>
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
 
@@ -59,7 +95,7 @@
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="State" />
 				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
-					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2}"></div>
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
 
@@ -67,7 +103,7 @@
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="ZIP / Postal Code" />
 				<div class="callback-item" ng:if="current_user.loading.<%= field %>">
-					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2}"></div>
+					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
 

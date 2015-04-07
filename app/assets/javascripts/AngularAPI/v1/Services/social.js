@@ -35,6 +35,8 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 			},function(data){
 
+				JP(data);
+
 				if (complete){complete(data,true);}
 
 				delete obj.loading;
@@ -72,6 +74,8 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				if (complete){complete(t.list,false);}
 
 			},function(data){
+
+				JP(data);
 
 				delete t.loading.get;
 
@@ -131,6 +135,10 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 				},function(data){
 
+					JP(data);
+
+					api_module[field] = api_module.x876[field];
+
 					api_module.loading[field] = 3;
 
 					if (complete){complete(data,true);}
@@ -173,6 +181,8 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 					},function(data){
 
+						JP(data);
+
 						api_module.loading = 3;
 
 						if (complete){complete(data,true);}
@@ -197,6 +207,8 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						if (complete){complete(data.social,false);}
 
 					},function(data){
+
+						JP(data);
 
 						delete api_module.loading;
 
@@ -226,6 +238,8 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 					if (complete){complete(data,false);}
 
 				},function(data){
+
+					JP(data);
 
 					delete api_module.loading;
 

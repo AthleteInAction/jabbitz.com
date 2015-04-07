@@ -2,6 +2,7 @@ module Api
   module V1
   	class SocialController < ApplicationController
 
+      before_action :set_social, only: [:show, :update, :destroy]
 
   		respond_to :json
 
@@ -25,8 +26,6 @@ module Api
   		# =================================================
   		def show
 
-  			@social = Social.find params[:id]
-
   			respond_with @social
 
   		end
@@ -39,15 +38,13 @@ module Api
   		# =================================================
   		def update
 
-  			@social = Social.find params[:id]
+        if @social.update(social_params)
 
-        if @social.update_attributes(params[:social])
-
-          render json: @social,status: 200
+          render json: @social,status: :ok
 
         else
 
-          render json: {error: true,errors: @social.errors},status: unprocessable_entity
+          render json: {error: true,errors: @social.errors},status: :unprocessable_entity
 
         end
 
@@ -60,16 +57,16 @@ module Api
   		# =================================================
   		# =================================================
   		def create
-        sleep 1
-  			@social = Social.new params[:social]
+
+  			@social = Social.new social_params
 
   			if @social.save
 
-  				render json: @social,status: 201
+  				render json: @social,status: :created
 
   			else
 
-  				render json: {error: true,errors: @social.errors},status: unprocessable_entity
+  				render json: {error: true,errors: @social.errors},status: :unprocessable_entity
 
   			end
 
@@ -82,8 +79,6 @@ module Api
   		# =================================================
   		# =================================================
   		def destroy
-        sleep 1
-  			@social = Social.find params[:id]
 
         if @social.destroy
 
@@ -91,13 +86,24 @@ module Api
 
         else
 
-          render json: {error: true,errors: @social.errors},status: unprocessable_entity
+          render json: {error: true,errors: @social.errors},status: :unprocessable_entity
 
         end
 
   		end
   		# =================================================
   		# =================================================
+
+      private
+      # Use callbacks to share common setup or constraints between actions.
+      def set_social
+        @social = Social.find params[:id]
+      end
+
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def social_params
+        params.require(:social).permit :user_id, :uri, :created_at, :updated_at
+      end
 
   	end
   end
