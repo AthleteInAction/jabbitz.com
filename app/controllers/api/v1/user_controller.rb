@@ -41,13 +41,13 @@ module Api
 
   			@user = User.find params[:id]
 
-        if @user.update_attributes(params[:user])
+        if @user.update(user_params)
 
           render json: @user,status: 200
 
         else
 
-          render json: @user.errors,status: unprocessable_entity
+          render json: {error: true,errors: @user.errors},status: unprocessable_entity
 
         end
 
@@ -98,6 +98,17 @@ module Api
   		end
   		# =================================================
   		# =================================================
+
+      private
+      # Use callbacks to share common setup or constraints between actions.
+      def set_user
+        @user = User.find(params[:id])
+      end
+
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def user_params
+        params.require(:user).permit(:name, :email, :password, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at)
+      end
 
   	end
   end
