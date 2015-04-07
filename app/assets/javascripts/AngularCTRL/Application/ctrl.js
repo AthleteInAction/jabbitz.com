@@ -6,6 +6,13 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 		var scope = $scope;
 
+		scope.current_user = API.users.new(current_user);
+		// setTimeout(function(){
+		// 	scope.current_user.save();
+		// },1000);
+
+		scope.location = $location.path().split('/');
+
 		JP('APPLICATION');
 
 	}

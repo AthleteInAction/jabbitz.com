@@ -1,6 +1,6 @@
 module Api
   module V1
-  	class UserController < ApplicationController
+  	class SocialController < ApplicationController
 
 
   		respond_to :json
@@ -11,9 +11,9 @@ module Api
   		# =================================================
   		def index
 
-  			@users = User.all
+  			@socials = Social.all
 
-  			respond_with @users,root: :users
+  			respond_with @socials,root: :socials
 
   		end
   		# =================================================
@@ -25,9 +25,9 @@ module Api
   		# =================================================
   		def show
 
-  			@user = User.find params[:id]
+  			@social = Social.find params[:id]
 
-  			respond_with @user
+  			respond_with @social
 
   		end
   		# =================================================
@@ -38,16 +38,16 @@ module Api
   		# =================================================
   		# =================================================
   		def update
-        sleep 1
-  			@user = User.find params[:id]
 
-        if @user.update_attributes(params[:user])
+  			@social = Social.find params[:id]
 
-          render json: @user,status: 200
+        if @social.update_attributes(params[:social])
+
+          render json: @social,status: 200
 
         else
 
-          render json: {error: true,errors: @user.errors},status: unprocessable_entity
+          render json: {error: true,errors: @social.errors},status: unprocessable_entity
 
         end
 
@@ -60,16 +60,16 @@ module Api
   		# =================================================
   		# =================================================
   		def create
+        sleep 1
+  			@social = Social.new params[:social]
 
-  			@user = User.new params[:user]
+  			if @social.save
 
-  			if @user.save
-
-  				render json: @user,status: 201
+  				render json: @social,status: 201
 
   			else
 
-  				render json: {error: true,errors: @user.errors},status: unprocessable_entity
+  				render json: {error: true,errors: @social.errors},status: unprocessable_entity
 
   			end
 
@@ -82,16 +82,16 @@ module Api
   		# =================================================
   		# =================================================
   		def destroy
+        sleep 1
+  			@social = Social.find params[:id]
 
-  			@user = User.find params[:id]
+        if @social.destroy
 
-        if @user.destroy
-
-          render json: {user: {id: params[:id].to_i}},status: 200
+          render json: {social: {id: params[:id].to_i}},status: 200
 
         else
 
-          render json: {error: true,errors: @user.errors},status: unprocessable_entity
+          render json: {error: true,errors: @social.errors},status: unprocessable_entity
 
         end
 

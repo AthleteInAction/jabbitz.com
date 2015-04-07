@@ -1,4 +1,4 @@
-App.directive('onstop',function(){
+App.directive('onStop',function(){
     return function (scope, element, attrs) {
         element.bind('keyup', function (event) {
 

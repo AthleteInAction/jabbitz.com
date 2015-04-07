@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng:app="App" ng:controller="Ctrl">
 <head>
+	<script type="text/javascript">var current_user = <%= current_user.to_json(except: :password_digest).html_safe %>;</script>
 	<link rel="shortcut icon" href="<%= asset_path 'logo.png' %>" />
 	<title><%= TITLE %></title>
 	<%= stylesheet_link_tag    'application' %>
@@ -9,14 +10,59 @@
 </head>
 <body>
 
-	<% flash.each do |type,message| %>
-		<alert type="<%= type %>"><%= message %></alert>
-	<% end %>
+	<div class="header">
 
-	Logged in as <%= current_user.email %>.
-	<%= link_to "Log Out", logout_path %>
+		<div class="container">
 
-	<div ng:view></div>
+			<div class="dashboard-nav">
+
+				<div class="dashboard-nav-item">
+					<a href="/" class="logo"></a>
+				</div>
+				<div class="dashboard-nav-item">
+					
+					<ul class="dashboard-nav-bar">
+						<li>
+							<a href="">Home</a>
+						</li>
+						<li>
+							<a href="">Find People</a>
+						</li>
+						<li>
+							<a href="">Messages</a>
+						</li>
+						<li>
+							<a href="">FAQ</a>
+						</li>
+						<li>
+							<a href="">Support</a>
+						</li>
+						<li>
+							<a href="#/myaccount" class="myaccount"></a>
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="body">
+
+		<div class="container">
+
+			<% flash.each do |type,message| %>
+				<alert type="<%= type %>"><%= message %></alert>
+			<% end %>
+
+			<div ng:view></div>
+
+		</div>
+
+	</div>
 
 </body>
 </html>

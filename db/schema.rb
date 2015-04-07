@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402113738) do
+ActiveRecord::Schema.define(version: 20150407170953) do
+
+  create_table "socials", force: true do |t|
+    t.integer  "user_id"
+    t.string   "uri"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -23,6 +30,11 @@ ActiveRecord::Schema.define(version: 20150402113738) do
     t.integer  "birth_month"
     t.integer  "birth_date"
     t.integer  "birth_year"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
   end
 
 end

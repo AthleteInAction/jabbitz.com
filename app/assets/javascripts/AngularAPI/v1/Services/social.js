@@ -1,6 +1,6 @@
-App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
+App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
-	this.users = {
+	this.socials = {
 
 		loading: {},
 
@@ -15,13 +15,13 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 			obj.loading = true;
 
 			var options = {
-				one: 'users',
+				one: 'socials',
 				id: id
 			};
 
 			ApiModelV1.get(options,function(data){
 
-				var u = t.new(data.user);
+				var u = t.new(data.social);
 
 				angular.forEach(u,function(val,key){
 
@@ -52,14 +52,14 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 			t.loading.get = true;
 
 			var options = {
-				one: 'users'
+				one: 'socials'
 			};
 
 			ApiModelV1.query(options,function(data){
 
 				var list = [];
 
-				angular.forEach(data.users,function(val,key){
+				angular.forEach(data.socials,function(val,key){
 
 					list.push(t.new(val));
 
@@ -109,11 +109,11 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				var ID = api_module.id;
 
 				var options = {
-					one: 'users',
+					one: 'socials',
 					id: ID
 				};
 
-				var Item = new ApiModelV1({user: new_item});
+				var Item = new ApiModelV1({social: new_item});
 
 				api_module.loading = {};
 				api_module.loading[field] = 1;
@@ -127,7 +127,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						delete api_module.loading[field];
 					},2000);
 
-					if (complete){complete(data.user,false);}
+					if (complete){complete(data.social,false);}
 
 				},function(data){
 
@@ -151,10 +151,10 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				}
 
 				var options = {
-					one: 'users'
+					one: 'socials'
 				};
 
-				var Item = new ApiModelV1({user: new_item});
+				var Item = new ApiModelV1({social: new_item});
 
 				if (ID){
 
@@ -169,7 +169,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 							delete api_module.loading;
 						},2000);
 
-						if (complete){complete(data.user,false);}
+						if (complete){complete(data.social,false);}
 
 					},function(data){
 
@@ -186,15 +186,15 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 					Item.$create(options,function(data){
 
-						api_module.id = data.user.id;
-						api_module.created_at = data.user.created_at;
-						api_module.updated_at = data.user.updated_at;
+						api_module.id = data.social.id;
+						api_module.created_at = data.social.created_at;
+						api_module.updated_at = data.social.updated_at;
 
 						delete api_module.loading;
 
 						t.list.unshift(api_module);
 
-						if (complete){complete(data.user,false);}
+						if (complete){complete(data.social,false);}
 
 					},function(data){
 
@@ -213,7 +213,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				api_module.loading = true;
 
 				var options = {
-					one: 'users',
+					one: 'socials',
 					id: api_module.id
 				};
 

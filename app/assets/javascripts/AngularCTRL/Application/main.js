@@ -5,10 +5,17 @@ App.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 	// html5Mode: true;
 
 	$routeProvider
-	/* MARKER */
+	/* MARKER */  	
+	.when('/myaccount',{
+
+		templateUrl : '/angularjs/templates/myaccount.html',
+		controller: MyaccountCtrl
+
+	})
+
 	.otherwise({
 		
-		redirectTo: '/'
+		redirectTo: '/myaccount'
 
 	});
 	

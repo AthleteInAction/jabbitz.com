@@ -12,9 +12,10 @@ App.config(['$httpProvider',function($httpProvider){
 // API
 // ======================================================================
 // ======================================================================
-App.service('API',['BlankSVC','UserSVC',function(BlankSVC,UserSVC){
+App.service('API',['BlankSVC','SocialSVC','UserSVC',function(BlankSVC,SocialSVC,UserSVC){
 
 	// INSERT HERE
+	this.socials = SocialSVC.socials;
 	this.users = UserSVC.users;
 
 }]);
