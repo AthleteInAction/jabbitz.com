@@ -130,7 +130,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 					if (complete){complete(data.user,false);}
 
 				},function(data){
-
+					JP(data);
 					api_module.loading[field] = 3;
 
 					if (complete){complete(data,true);}
