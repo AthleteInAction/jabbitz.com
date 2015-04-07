@@ -47,7 +47,7 @@ module Api
 
         else
 
-          render json: {error: true,errors: @user.errors},status: unprocessable_entity
+          render json: {error: true,errors: @user},status: unprocessable_entity
 
         end
 
