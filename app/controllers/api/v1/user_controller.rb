@@ -38,16 +38,16 @@ module Api
   		# =================================================
   		# =================================================
   		def update
-        
+
   			@user = User.find params[:id]
 
-        if @user.update_attributes(params[:user])
+        if @user.update(params[:user])
 
           render json: @user,status: 200
 
         else
 
-          render json: {error: true,errors: @user}#,status: unprocessable_entity
+          render json: {error: true,errors: @user.errors},status: unprocessable_entity
 
         end
 
