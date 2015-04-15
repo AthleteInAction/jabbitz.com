@@ -10,7 +10,7 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 		scope.days = days;
 
 		scope.current_user = API.users.new(current_user);
-		if (!scope.current_user.image){
+		if (!scope.current_user.image.url){
 			scope.current_user.image = {
 				url: "<%= asset_path 'blank-profile-image.png' %>",
 				thumb: {
