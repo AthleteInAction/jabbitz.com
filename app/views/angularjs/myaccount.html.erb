@@ -10,8 +10,13 @@
 	</tr>
 	<tr>
 		<td>
-			<img src="http://irapcity.com/images/image5.png" />
-			<div><button class="btn btn-default">Change Photo</button></div>
+
+			<img src="{{current_user.image.url}}" />
+			<div class="upload-btn">
+				<progressbar class="progress-striped" value="upload_pct" type="success" ng:if="upload_pct">{{upload_pct}}%</progressbar>
+				<button class="btn btn-default" ng:if="!upload_pct" ng-file-select ng-file-change="upload($files)">Change Photo</button>
+			</div>
+
 		</td>
 		<td>
 

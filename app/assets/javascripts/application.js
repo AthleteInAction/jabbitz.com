@@ -4,6 +4,7 @@
 //= require ./AngularJS/angular-resource.js
 //= require ./AngularJS/angular-route.js
 //= require ./AngularJS/angular-sanitize.js
+//= require ./AngularJS/angular-uploader.js
 //= require ./AngularJS/ui-bootstrap-tpls-0.12.1.js
 //= require_tree ./AngularCTRL/Application
 //= require z_global

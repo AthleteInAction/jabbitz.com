@@ -1,5 +1,5 @@
-var MyaccountCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window',
-	function($scope,$routeParams,$location,$timeout,$interval,API,$window){
+var MyaccountCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window','$upload',
+	function($scope,$routeParams,$location,$timeout,$interval,API,$window,$upload){
 
 		var scope = $scope;
 
@@ -22,6 +22,40 @@ var MyaccountCtrl = ['$scope','$routeParams','$location','$timeout','$interval',
 			});
 
 		};
+
+		// UPLOADER
+		// =====================================================================
+		// =====================================================================
+		$scope.upload = function (files) {
+			if (files && files.length) {
+				scope.upload_pct = 1;
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					$upload.upload({
+						url: '/api/v1/users/'+scope.$parent.current_user.id+'.json',
+						fields: {'username': $scope.username},
+						file: file
+					}).progress(function (evt) {
+						
+						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+						scope.upload_pct = progressPercentage
+
+					}).success(function (data,status,headers,config) {
+						
+						scope.$parent.current_user.image = data.user.image.image
+
+						delete scope.upload_pct;
+
+					}).error(function(){
+
+						delete scope.upload_pct;
+
+					});
+				}
+			}
+		};
+        // =====================================================================
+        // =====================================================================
 
 		JP('MYACCOUNT');
 

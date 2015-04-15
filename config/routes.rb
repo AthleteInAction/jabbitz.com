@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   			# API INSERT
 			resources :social,path: 'socials'
 			resources :user,path: 'users'
+			post 'users/:id',to: 'user#change_profile_image'
 
   		end
   	end

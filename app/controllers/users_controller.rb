@@ -1,10 +1,6 @@
-module Api
-  module V1
-  	class UserController < ApplicationController
+class UsersController < ApplicationController
 
-      before_action :set_user, only: [:show, :update, :destroy, :change_profile_image]
-
-  		respond_to :json, except: [:change_profile_image]
+      before_action :set_user, only: [:show, :update, :destroy]
 
 
   		# GET
@@ -14,7 +10,7 @@ module Api
 
   			@users = User.all
 
-  			respond_with @users,root: :users
+  			render json: @users,root: :users
 
   		end
   		# =================================================
@@ -26,7 +22,7 @@ module Api
   		# =================================================
   		def show
 
-  			respond_with @user
+  			render json: @user
 
   		end
   		# =================================================
@@ -94,28 +90,6 @@ module Api
   		# =================================================
   		# =================================================
 
-
-      # PROFILE IMAGE
-      # =================================================
-      # =================================================
-      def change_profile_image
-        
-        params.require(:file)
-
-        if @user.update(image: params[:file])
-
-          render json: @user,status: 200
-
-        else
-
-          render json: {error: true,errors: @user.errors},status: :unprocessable_entity
-
-        end
-
-      end
-      # =================================================
-      # =================================================
-
       private
       # Use callbacks to share common setup or constraints between actions.
       def set_user
@@ -124,9 +98,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_params
-        params.require(:user).permit :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at
+        params.require(:user).permit :name, :email, :password, :image, :remote_image_url, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at
       end
 
   	end
-  end
-end

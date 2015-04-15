@@ -56,3 +56,6 @@ group :production,:staging do
   gem 'mysql2'
   
 end
+
+gem "rmagick"
+gem "carrierwave"

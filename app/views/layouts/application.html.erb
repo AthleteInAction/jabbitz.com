@@ -38,7 +38,9 @@
 							<a href="">Support</a>
 						</li>
 						<li>
-							<a href="#/myaccount" class="myaccount"></a>
+							<a href="#/myaccount" class="myaccount">
+								<img src="{{current_user.image.thumb.url}}" />
+							</a>
 						</li>
 					</ul>
 
@@ -57,7 +59,7 @@
 			<% flash.each do |type,message| %>
 				<alert type="<%= type %>"><%= message %></alert>
 			<% end %>
-
+			
 			<div ng:view></div>
 
 		</div>
