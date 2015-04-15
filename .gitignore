@@ -16,4 +16,4 @@
 /tmp
 
 # Ignore Profile Images
-/z_images
+#/public/uploads
