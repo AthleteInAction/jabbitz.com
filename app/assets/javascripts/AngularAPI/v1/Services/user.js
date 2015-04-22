@@ -4,11 +4,18 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 		loading: {},
 
+		key: {},
+
 		list: [],
 
 		find: function(id,complete){
 
 			var t = this;
+			
+			if (t.key[id]){
+				if (complete){complete(t.key[id],false);}
+				return false;
+			}
 
 			var obj = t.new({id: id});
 
@@ -29,6 +36,8 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 				});
 
+				t.key[obj.id] = obj;
+
 				if (complete){complete(obj,false);}
 
 				delete obj.loading;
@@ -47,7 +56,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 		},
 
-		get: function(complete){
+		get: function(params,complete){
 
 			var t = this;
 
@@ -57,13 +66,17 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				one: 'users'
 			};
 
+			options = $.extend(options,params);
+
 			ApiModelV1.query(options,function(data){
 
 				var list = [];
 
+				t.key = {};
 				angular.forEach(data.users,function(val,key){
 
 					list.push(t.new(val));
+					t.key[val.id] = t.new(val);
 
 				});
 
@@ -177,6 +190,9 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 							delete api_module.loading;
 						},2000);
 
+						t.key[ID] = api_module;
+						t.key[ID].id = ID;
+
 						if (complete){complete(data.user,false);}
 
 					},function(data){
@@ -203,6 +219,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						delete api_module.loading;
 
 						t.list.unshift(api_module);
+						t.key[api_module.id] = api_module;
 
 						if (complete){complete(data.user,false);}
 
@@ -232,6 +249,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				ApiModelV1.destroy(options,function(data){
 
 					t.list.removeWhere('id',api_module.id);
+					delete t.key[api_module.id];
 
 					delete api_module.loading;
 

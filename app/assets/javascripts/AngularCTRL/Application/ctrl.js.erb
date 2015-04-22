@@ -21,6 +21,38 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 		scope.location = $location.path().split('/');
 
+		scope.users = API.users;
+
+		scope.search = {};
+
+		scope.searchUsers = function(){
+
+			JP('SEARCH');
+
+			var CLEAN = false;
+
+			var tmp = {};
+			angular.forEach(scope.search,function(val,key){
+
+				tmp[key] = val;
+
+				if (key == 'name' && val && val != ''){
+					tmp.name = '*'+val+'*';
+				}
+
+				if (!val || val == ''){
+					delete scope.search[key];
+					delete tmp[key];
+				}
+
+				if (val || val != ""){CLEAN = true;}
+
+			});
+
+			if (CLEAN){scope.users.get(tmp);}
+
+		};
+
 		JP('APPLICATION');
 
 	}

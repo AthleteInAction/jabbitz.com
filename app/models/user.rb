@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
 	attr_accessible :name, :email, :password, :image, :remote_image_url, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at
 
+	has_many :socials
+
 	mount_uploader :image, ProfileUploader
 
 	validates_presence_of :name,:email

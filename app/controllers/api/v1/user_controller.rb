@@ -12,7 +12,7 @@ module Api
   		# =================================================
   		def index
 
-  			@users = User.all
+        @users = User.find_by_sql Tools.query(params)
 
   			respond_with @users,root: :users
 

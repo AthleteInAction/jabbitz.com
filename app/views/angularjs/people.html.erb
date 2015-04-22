@@ -1,0 +1,56 @@
+<ol class="breadcrumb">
+	<li><a href="#/">Home</a></li>
+	<li class="active">Find People</li>
+</ol>
+
+<div class="well">
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.name" placeholder="Name" onenter="searchUsers()" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.email" placeholder="Email" onenter="searchUsers()" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.phone" placeholder="Phone Number" onenter="searchUsers()" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.address" placeholder="Address" onenter="searchUsers()" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.city" placeholder="City" onenter="searchUsers()" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.state" placeholder="State" onenter="searchUsers()" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.zip_code" placeholder="ZIP / Postal Code" onenter="searchUsers()" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Age" />
+	</div>
+
+	<div align="center"><button class="btn btn-default btn-lg" ng:click="searchUsers()">Search</button></div>
+
+</div>
+
+<a href="#/people/{{user.id}}" class="search-person" ng:repeat="user in users.list | orderBy:'-id'">
+
+	<div align="center" class="search-person-image" ng:if="user.image.image.url"><img ng:src="{{user.image.image.url}}" /></div>
+
+	<div class="search-person-header" ng:if="user.name">{{user.name}}</div>
+	<div class="search-person-sub" ng:if="user.city">City:&nbsp;&nbsp;{{user.city}}</div>
+	<div class="search-person-sub" ng:if="user.state">State:&nbsp;&nbsp;{{user.state}}</div>
+	<div class="search-person-sub" ng:if="user.email">Email:&nbsp;&nbsp;{{user.email}}</div>
+	<div class="search-person-sub" ng:if="user.phone">Phone&nbsp;Number:&nbsp;&nbsp;{{user.phone}}</div>
+	<div class="search-person-sub" ng:if="user.gender">Gender:&nbsp;&nbsp;{{user.gender}}</div>
+
+</a>
+<div class="CLEAR"></div>

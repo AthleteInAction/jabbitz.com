@@ -1,0 +1,168 @@
+<ol class="breadcrumb">
+	<li><a href="#/">Home</a></li>
+	<li><a href="#/people">People</a></li>
+	<li class="active">{{user.name}}</li>
+</ol>
+
+<table class="myaccount-table">
+	<tr>
+		<th><h3>Profile Picture</h3></th>
+		<th><h3>Personal Information</h3></th>
+	</tr>
+	<tr>
+		<td>
+
+			<img ng:src="{{user.image.image.url}}" />
+
+		</td>
+		<td class="person-info">
+
+			<div class="person-item person-name">
+				<span class="name">{{user.name}}</span><span class="age" ng:if="user.birth_year">,&nbsp;48</span>
+			</div>
+			<div class="person-item person-location">
+				<span class="city" ng:if="user.city">{{user.city}}</span><span class="state" ng:if="user.state"><span ng:if="user.city">,&nbsp;</span>{{user.state}}</span>
+			</div>
+			<div class="person-item person-gender">Male</div>
+
+			<div class="person-social"><h3>Social Accounts</h3></div>
+
+			<div class="person-social-account">
+				<div class="item">
+					<%= image_tag 'social-facebook.png',width: 29 %>
+				</div>
+				<div class="item">
+					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
+				</div>
+			</div>
+
+			<div class="person-social-account">
+				<div class="item">
+					<%= image_tag 'social-instagram.png',width: 29 %>
+				</div>
+				<div class="item">
+					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
+				</div>
+			</div>
+
+			<div class="person-social-account">
+				<div class="item">
+					<%= image_tag 'social-twitter.png',width: 29 %>
+				</div>
+				<div class="item">
+					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
+				</div>
+			</div>
+
+			<div class="person-social-account">
+				<div class="item">
+					<%= image_tag 'social-pinterest.png',width: 29 %>
+				</div>
+				<div class="item">
+					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
+				</div>
+			</div>
+
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2"><h3>Chimes</h3></th>
+	</tr>
+	<tr>
+		<td colspan="2" ng:init="chime_collapsed = false">
+
+			<a href="" ng:click="chime_collapsed = false" ng:show="chime_collapsed">+ Add Chime</a>
+			<a href="" ng:click="chime_collapsed = true" ng:show="!chime_collapsed">- Close</a>
+
+			<div class="well" collapse="chime_collapsed" ng:init="chime_collapsed = false">
+
+				<form name="new_chime_form" novalidate ng:submit="newChimeForm()">
+
+				<div class="form-group">
+
+					<div><label>Category:</label></div>
+					<select name="category" ng:model="new_chime.category" class="form-control" required>
+						<option value="">Select a Category</option>
+						<option value="dating">Dating</option>
+						<option value="employment">Employment</option>
+						<option value="school">School</option>
+						<option value="other">Other</option>
+					</select>
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category && new_chime.category != ''">
+
+					<div><label>Date of interaction:</label></div>
+					<div class="row">
+						<div class="col-md-6">
+							<p class="input-group">
+								<input type="text" name="interaction_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="new_chime.interaction_date" is-open="opened" show-weeks="false" readonly placeholder="" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+							</p>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category && new_chime.category != ''">
+
+					<div><label>Rate your experience:</label></div>
+					<rating ng-model="new_chime.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+					<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent/10}}/10</span>
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category == 'dating'">
+
+					<div><label>Dating Site:</label></div>
+					<input type="text" class="form-control" name="site" ng:model="new_chime.site" placeholder="http://" />
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category == 'employment'">
+
+					<div><label>Employer:</label></div>
+					<input type="text" class="form-control" name="employer" ng:model="new_chime.employer" placeholder="" />
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category == 'employment'">
+
+					<div><label>Job Title:</label></div>
+					<input type="text" class="form-control" name="job_title" ng:model="new_chime.job_title" placeholder="" />
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category == 'school'">
+
+					<div><label>School:</label></div>
+					<input type="text" class="form-control" name="school" ng:model="new_chime.school" placeholder="" />
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category == 'employment' || new_chime.category == 'school' || new_chime.category == 'other'">
+
+					<div><label>City:</label></div>
+					<input type="text" class="form-control" name="location" ng:model="new_chime.location" placeholder="Example: San Jose, CA" />
+
+				</div>
+
+				<div class="form-group" ng:if="new_chime.category && new_chime.category != ''">
+
+					<div><label>Describe your experience:</label></div>
+					<textarea name="body" ng:model="new_chime.body" class="form-control" placeholder=""></textarea>
+
+				</div>
+
+				<button class="btn btn-default" ng:if="new_chime.category && new_chime.category != ''">Submit</button>
+
+				</form>
+
+			</div>
+
+		</td>
+	</tr>
+</table>

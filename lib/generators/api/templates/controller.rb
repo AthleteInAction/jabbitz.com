@@ -12,7 +12,7 @@ module Api
   		# =================================================
   		def index
 
-  			@<%= name %>s = <%= name.capitalize %>.all
+  			@<%= name %>s = <%= name.capitalize %>.find_by_sql Tools.query(params)
 
   			respond_with @<%= name %>s,root: :<%= name %>s
 

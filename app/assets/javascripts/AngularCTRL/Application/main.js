@@ -6,6 +6,20 @@ App.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 
 	$routeProvider
 	/* MARKER */  	
+	.when('/people/:id',{
+
+		templateUrl : '/angularjs/templates/people_show.html',
+		controller: PeopleShowCtrl
+
+	})
+  	
+	.when('/people',{
+
+		templateUrl : '/angularjs/templates/people.html',
+		controller: PeopleCtrl
+
+	})
+  	
 	.when('/myaccount',{
 
 		templateUrl : '/angularjs/templates/myaccount.html',

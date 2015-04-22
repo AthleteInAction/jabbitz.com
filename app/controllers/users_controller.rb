@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   		# =================================================
   		def index
 
-  			@users = User.all
+        @users = User.find_by_sql Tools.query(params)
 
   			render json: @users,root: :users
 

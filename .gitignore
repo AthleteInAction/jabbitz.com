@@ -17,3 +17,5 @@
 
 # Ignore Profile Images
 /public/uploads
+
+/lib/tasks

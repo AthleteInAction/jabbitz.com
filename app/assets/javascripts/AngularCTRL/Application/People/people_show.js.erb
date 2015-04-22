@@ -1,0 +1,85 @@
+var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window',
+	function($scope,$routeParams,$location,$timeout,$interval,API,$window){
+
+		var scope = $scope;
+
+		scope.params = $routeParams;
+		scope.new_chime = {};
+
+		scope.setImage = function(){
+
+			if (scope.user && !scope.user.image.image.url){
+				scope.user.image.image.url = "<%= asset_path 'blank-profile-image.png' %>";
+				scope.user.image.image.thumb.url = "<%= asset_path 'blank-profile-image-thumb.png' %>";
+			}
+
+		};
+
+		scope.getUser = function(){
+
+			scope.$parent.users.find(scope.params.id,function(user,error){
+
+				if (!error){
+					scope.user = user;
+					scope.setImage();
+				}
+
+			});
+
+		};
+		scope.getUser();
+
+		JP('PEOPLESHOW');
+
+		// =======
+		scope.today = function() {
+			scope.new_chime.interaction_date = new Date();
+		};
+
+		scope.clear = function () {
+			scope.new_chime.interaction_date = null;
+		};
+
+		scope.max = 10;
+		scope.isReadonly = false;
+
+		$scope.hoveringOver = function(value){
+
+			scope.overStar = value;
+			scope.percent = 100 * (value / scope.max);
+
+		};
+
+		scope.ratingStates = [
+			{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+			{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+			{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+			{stateOn: 'glyphicon-heart'},
+			{stateOff: 'glyphicon-off'}
+		];
+
+		scope.open = function($event){
+			
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			scope.opened = true;
+
+		};
+
+		scope.newChimeForm = function(){
+
+			if (scope.new_chime_form.$valid) {
+
+				JP('VALID');
+
+			} else {
+
+				JP('INVALID');
+
+			}
+
+		};
+
+	}
+];
