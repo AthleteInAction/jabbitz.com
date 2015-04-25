@@ -6,11 +6,15 @@ module Api
 
   		respond_to :json
 
-
   		# GET
   		# =================================================
   		# =================================================
   		def index
+
+        q = "SELECT * FROM <%= name %>s"
+        q << Tools.query(params)
+
+        @<%= name %>s = Chime.find_by_sql q
 
   			@<%= name %>s = <%= name.capitalize %>.find_by_sql Tools.query(params)
 
@@ -82,7 +86,7 @@ module Api
 
         if @<%= name %>.destroy
 
-          render json: {<%= name %>: {id: params[:id].to_i}},status: 200
+          render json: {<%= name %>: {id: params[:id].to_i}},status: :ok
 
         else
 

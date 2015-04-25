@@ -4,7 +4,13 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 		var scope = $scope;
 
 		scope.params = $routeParams;
-		scope.new_chime = {};
+		
+		scope.new_chime = API.chimes.new({
+			author_id: scope.$parent.current_user.id,
+			user_id: scope.params.id
+		});
+		scope.chimes = API.chimes;
+		scope.chimes.get({user_id: scope.params.id});
 
 		scope.setImage = function(){
 
@@ -72,6 +78,20 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 			if (scope.new_chime_form.$valid) {
 
 				JP('VALID');
+
+				scope.new_chime.save(function(data,error){
+
+					if (!error){
+
+						scope.new_chime = API.chimes.new({
+							author_id: scope.$parent.current_user.id,
+							user_id: scope.params.id
+						});
+						scope.chime_collapsed = true;
+
+					}
+
+				});
 
 			} else {
 

@@ -1,22 +1,22 @@
 module Api
   module V1
-  	class UserController < ApplicationController
+  	class ChimeController < ApplicationController
 
-      before_action :set_user, only: [:show, :update, :destroy]
+      before_action :set_chime, only: [:show, :update, :destroy]
 
-  		respond_to :json, except: [:change_profile_image]
+  		respond_to :json
 
   		# GET
   		# =================================================
   		# =================================================
   		def index
 
-        q = "SELECT * FROM users"
+        q = "SELECT * FROM chimes"
         q << Tools.query(params)
 
-  			@users = User.find_by_sql q
+  			@chimes = Chime.find_by_sql q
 
-  			respond_with @users,root: :users
+  			respond_with @chimes,root: :chimes
 
   		end
   		# =================================================
@@ -28,7 +28,7 @@ module Api
   		# =================================================
   		def show
 
-  			respond_with @user
+  			respond_with @chime
 
   		end
   		# =================================================
@@ -40,13 +40,13 @@ module Api
   		# =================================================
   		def update
 
-        if @user.update(user_params)
+        if @chime.update(chime_params)
 
-          render json: @user,status: :ok
+          render json: @chime,status: :ok
 
         else
 
-          render json: {error: true,errors: @user.errors},status: :unprocessable_entity
+          render json: {error: true,errors: @chime.errors},status: :unprocessable_entity
 
         end
 
@@ -60,15 +60,15 @@ module Api
   		# =================================================
   		def create
 
-  			@user = User.new user_params
+  			@chime = Chime.new chime_params
 
-  			if @user.save
+  			if @chime.save
 
-  				render json: @user,status: :created
+  				render json: @chime,status: :created
 
   			else
 
-  				render json: {error: true,errors: @user.errors},status: :unprocessable_entity
+  				render json: {error: true,errors: @chime.errors},status: :unprocessable_entity
 
   			end
 
@@ -82,13 +82,13 @@ module Api
   		# =================================================
   		def destroy
 
-        if @user.destroy
+        if @chime.destroy
 
-          render json: {user: {id: params[:id].to_i}},status: :ok
+          render json: {chime: {id: params[:id].to_i}},status: :ok
 
         else
 
-          render json: {error: true,errors: @user.errors},status: :unprocessable_entity
+          render json: {error: true,errors: @chime.errors},status: :unprocessable_entity
 
         end
 
@@ -96,37 +96,15 @@ module Api
   		# =================================================
   		# =================================================
 
-
-      # PROFILE IMAGE
-      # =================================================
-      # =================================================
-      def change_profile_image
-        
-        params.require(:file)
-
-        if @user.update(image: params[:file])
-
-          render json: @user,status: :ok
-
-        else
-
-          render json: {error: true,errors: @user.errors},status: :unprocessable_entity
-
-        end
-
-      end
-      # =================================================
-      # =================================================
-
       private
       # Use callbacks to share common setup or constraints between actions.
-      def set_user
-        @user = User.find params[:id]
+      def set_chime
+        @chime = Chime.find params[:id]
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
-      def user_params
-        params.require(:user).permit :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at
+      def chime_params
+        params.require(:chime).permit :author_id, :user_id, :category, :rating, :interaction_date, :site, :body, :body_html, :body_short, :employer, :job_title, :location, :school, :created_at, :updated_at
       end
 
   	end

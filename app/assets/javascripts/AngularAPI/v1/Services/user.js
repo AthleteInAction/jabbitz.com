@@ -190,7 +190,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 							delete api_module.loading;
 						},2000);
 
-						t.key[ID] = api_module;
+						t.key[api_module.id] = api_module;
 						t.key[ID].id = ID;
 
 						if (complete){complete(data.user,false);}
@@ -249,7 +249,6 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				ApiModelV1.destroy(options,function(data){
 
 					t.list.removeWhere('id',api_module.id);
-					delete t.key[api_module.id];
 
 					delete api_module.loading;
 

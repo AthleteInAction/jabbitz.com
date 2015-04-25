@@ -4,7 +4,7 @@ module Tools
 
 	def query params
 
-		q = "SELECT * FROM users"
+		q = ""
 
     list = []
     params.each_with_index do |(key,val),i|
@@ -30,7 +30,7 @@ module Tools
     q << list.join('')
     q << ")" if list.count > 0
 
-    q << ' LIMIT 100'
+    q << ' LIMIT 200'
 
     q
 

@@ -6,13 +6,15 @@ module Api
 
   		respond_to :json
 
-
   		# GET
   		# =================================================
   		# =================================================
   		def index
 
-  			@socials = Social.all
+        q = "SELECT * FROM socials"
+        q << Tools.query(params)
+
+  			@socials = Social.find_by_sql q
 
   			respond_with @socials,root: :socials
 
@@ -82,7 +84,7 @@ module Api
 
         if @social.destroy
 
-          render json: {social: {id: params[:id].to_i}},status: 200
+          render json: {social: {id: params[:id].to_i}},status: :ok
 
         else
 

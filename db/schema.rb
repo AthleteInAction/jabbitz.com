@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414213036) do
+ActiveRecord::Schema.define(version: 20150422034904) do
+
+  create_table "chimes", force: true do |t|
+    t.string   "category"
+    t.integer  "rating"
+    t.date     "interaction_date"
+    t.string   "site"
+    t.text     "body"
+    t.text     "body_html"
+    t.string   "body_short"
+    t.string   "employer"
+    t.string   "job_title"
+    t.string   "location"
+    t.string   "school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "author_id"
+  end
 
   create_table "socials", force: true do |t|
     t.integer  "user_id"

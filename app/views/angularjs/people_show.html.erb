@@ -74,7 +74,7 @@
 			<a href="" ng:click="chime_collapsed = false" ng:show="chime_collapsed">+ Add Chime</a>
 			<a href="" ng:click="chime_collapsed = true" ng:show="!chime_collapsed">- Close</a>
 
-			<div class="well" collapse="chime_collapsed" ng:init="chime_collapsed = false">
+			<div class="well" collapse="chime_collapsed" ng:init="chime_collapsed = true">
 
 				<form name="new_chime_form" novalidate ng:submit="newChimeForm()">
 
@@ -91,13 +91,13 @@
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category && new_chime.category != ''">
+				<div class="form-group" ng:show="new_chime.category && new_chime.category != ''">
 
 					<div><label>Date of interaction:</label></div>
 					<div class="row">
 						<div class="col-md-6">
 							<p class="input-group">
-								<input type="text" name="interaction_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="new_chime.interaction_date" is-open="opened" show-weeks="false" readonly placeholder="" />
+								<input type="text" name="interaction_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="new_chime.interaction_date" is-open="opened" show-weeks="false" readonly required placeholder="" />
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 								</span>
@@ -107,7 +107,7 @@
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category && new_chime.category != ''">
+				<div class="form-group" ng:show="new_chime.category && new_chime.category != ''">
 
 					<div><label>Rate your experience:</label></div>
 					<rating ng-model="new_chime.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
@@ -115,51 +115,65 @@
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category == 'dating'">
+				<div class="form-group" ng:show="new_chime.category == 'dating'">
 
 					<div><label>Dating Site:</label></div>
 					<input type="text" class="form-control" name="site" ng:model="new_chime.site" placeholder="http://" />
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category == 'employment'">
+				<div class="form-group" ng:show="new_chime.category == 'employment'">
 
 					<div><label>Employer:</label></div>
 					<input type="text" class="form-control" name="employer" ng:model="new_chime.employer" placeholder="" />
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category == 'employment'">
+				<div class="form-group" ng:show="new_chime.category == 'employment'">
 
 					<div><label>Job Title:</label></div>
 					<input type="text" class="form-control" name="job_title" ng:model="new_chime.job_title" placeholder="" />
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category == 'school'">
+				<div class="form-group" ng:show="new_chime.category == 'school'">
 
 					<div><label>School:</label></div>
 					<input type="text" class="form-control" name="school" ng:model="new_chime.school" placeholder="" />
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category == 'employment' || new_chime.category == 'school' || new_chime.category == 'other'">
+				<div class="form-group" ng:show="new_chime.category == 'employment' || new_chime.category == 'school' || new_chime.category == 'other'">
 
 					<div><label>City:</label></div>
 					<input type="text" class="form-control" name="location" ng:model="new_chime.location" placeholder="Example: San Jose, CA" />
 
 				</div>
 
-				<div class="form-group" ng:if="new_chime.category && new_chime.category != ''">
+				<div class="form-group" ng:show="new_chime.category && new_chime.category != ''">
 
 					<div><label>Describe your experience:</label></div>
-					<textarea name="body" ng:model="new_chime.body" class="form-control" placeholder=""></textarea>
+					<textarea name="body" ng:model="new_chime.body" class="form-control" required placeholder=""></textarea>
 
 				</div>
 
 				<button class="btn btn-default" ng:if="new_chime.category && new_chime.category != ''">Submit</button>
 
 				</form>
+
+			</div>
+
+			<span ng:init="chimes.get()"></span>
+
+			<div class="chime-container" ng:repeat="chime in chimes.list | orderBy:'-updated_at'">
+
+				<rating ng-model="chime.rating" max="max" readonly="true"></rating>
+
+				<div class="chime-name">
+					{{chime.author.name}}<span ng:if="chime.author.city">&nbsp;|&nbsp;{{chime.author.city}}</span><span ng:if="chime.author.state"><span ng:if="chime.author.city">,&nbsp;</span>{{chime.author.state}}</span>
+				</div>
+
+				<div class="chime-body" ng-bind-html="chime.body_html"></div>
 
 			</div>
 

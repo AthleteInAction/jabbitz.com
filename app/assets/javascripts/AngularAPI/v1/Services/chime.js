@@ -1,6 +1,6 @@
-App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
+App.service('ChimeSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
-	this.socials = {
+	this.chimes = {
 
 		loading: {},
 
@@ -22,13 +22,13 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 			obj.loading = true;
 
 			var options = {
-				one: 'socials',
+				one: 'chimes',
 				id: id
 			};
 
 			ApiModelV1.get(options,function(data){
 
-				var u = t.new(data.social);
+				var u = t.new(data.chime);
 
 				angular.forEach(u,function(val,key){
 
@@ -63,7 +63,7 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 			t.loading.get = true;
 
 			var options = {
-				one: 'socials'
+				one: 'chimes'
 			};
 
 			options = $.extend(options,params);
@@ -73,7 +73,7 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				var list = [];
 
 				t.key = {};
-				angular.forEach(data.socials,function(val,key){
+				angular.forEach(data.chimes,function(val,key){
 
 					list.push(t.new(val));
 					t.key[val.id] = t.new(val);
@@ -126,11 +126,11 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				var ID = api_module.id;
 
 				var options = {
-					one: 'socials',
+					one: 'chimes',
 					id: ID
 				};
 
-				var Item = new ApiModelV1({social: new_item});
+				var Item = new ApiModelV1({chime: new_item});
 
 				api_module.loading = {};
 				api_module.loading[field] = 1;
@@ -144,7 +144,7 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						delete api_module.loading[field];
 					},2000);
 
-					if (complete){complete(data.social,false);}
+					if (complete){complete(data.chime,false);}
 
 				},function(data){
 
@@ -172,10 +172,10 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				}
 
 				var options = {
-					one: 'socials'
+					one: 'chimes'
 				};
 
-				var Item = new ApiModelV1({social: new_item});
+				var Item = new ApiModelV1({chime: new_item});
 
 				if (ID){
 
@@ -193,7 +193,7 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						t.key[api_module.id] = api_module;
 						t.key[ID].id = ID;
 
-						if (complete){complete(data.social,false);}
+						if (complete){complete(data.chime,false);}
 
 					},function(data){
 
@@ -212,16 +212,18 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 					Item.$create(options,function(data){
 
-						api_module.id = data.social.id;
-						api_module.created_at = data.social.created_at;
-						api_module.updated_at = data.social.updated_at;
+						// api_module.id = data.chime.id;
+						// api_module.created_at = data.chime.created_at;
+						// api_module.updated_at = data.chime.updated_at;
 
 						delete api_module.loading;
+
+						api_module = t.new(data.chime);
 
 						t.list.unshift(api_module);
 						t.key[api_module.id] = api_module;
 
-						if (complete){complete(data.social,false);}
+						if (complete){complete(data.chime,false);}
 
 					},function(data){
 
@@ -242,7 +244,7 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 				api_module.loading = true;
 
 				var options = {
-					one: 'socials',
+					one: 'chimes',
 					id: api_module.id
 				};
 

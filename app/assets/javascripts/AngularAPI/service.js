@@ -14,13 +14,15 @@ App.config(['$httpProvider',function($httpProvider){
 // API
 // ======================================================================
 // ======================================================================
-App.service('API',['BlankSVC','SocialSVC','UserSVC',function(BlankSVC,SocialSVC,UserSVC){
+App.service('API',['BlankSVC','ChimeSVC','SocialSVC','UserSVC',function(BlankSVC,ChimeSVC,SocialSVC,UserSVC){
 
 	// INSERT HERE
+	this.chimes = ChimeSVC.chimes;
 	this.socials = SocialSVC.socials;
 	this.users = UserSVC.users;
 
 }]);
+// Placemarker
 App.service('BlankSVC',[function(){}]);
 // ======================================================================
 // ======================================================================
