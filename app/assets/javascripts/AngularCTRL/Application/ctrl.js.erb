@@ -62,7 +62,7 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 					}
 
 					<% if !E.development? %>
-					_gaq.push(['_trackEvent','Search',scope.users.list.length,JSON.stringify(tmp)]);
+					ga('send','event','Search','People',JSON.stringify({n: scope.users.list.length,v: tmp}),scope.users.list.length);
 					<% end %>
 
 				});
