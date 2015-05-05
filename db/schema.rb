@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422034904) do
+ActiveRecord::Schema.define(version: 20150505044401) do
 
   create_table "chimes", force: true do |t|
     t.string   "category"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 20150422034904) do
     t.string   "state"
     t.string   "zip_code"
     t.string   "image"
+    t.integer  "author_id"
+    t.boolean  "floating",        default: false
+    t.string   "promo_code"
   end
 
 end

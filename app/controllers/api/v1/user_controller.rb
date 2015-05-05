@@ -2,7 +2,7 @@ module Api
   module V1
   	class UserController < ApplicationController
 
-      before_action :set_user, only: [:show, :update, :destroy]
+      before_action :set_user, only: [:show,:update,:destroy,:change_profile_image]
 
   		respond_to :json, except: [:change_profile_image]
 
@@ -126,7 +126,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_params
-        params.require(:user).permit :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at
+        params.require(:user).permit :promo_code, :floating, :author_id, :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at
       end
 
   	end

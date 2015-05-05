@@ -23,43 +23,17 @@
 			<div class="person-item person-location">
 				<span class="city" ng:if="user.city">{{user.city}}</span><span class="state" ng:if="user.state"><span ng:if="user.city">,&nbsp;</span>{{user.state}}</span>
 			</div>
-			<div class="person-item person-gender">Male</div>
 
 			<div class="person-social"><h3>Social Accounts</h3></div>
 
-			<div class="person-social-account">
-				<div class="item">
-					<%= image_tag 'social-facebook.png',width: 29 %>
-				</div>
-				<div class="item">
-					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
-				</div>
-			</div>
+			<span ng:init="socials.get({user_id: params.id})"></span>
 
-			<div class="person-social-account">
+			<div class="person-social-account" ng:repeat="social in socials.list">
 				<div class="item">
-					<%= image_tag 'social-instagram.png',width: 29 %>
+					<img ng:src="/images/{{simage(social.uri)}}" width="29" />
 				</div>
 				<div class="item">
-					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
-				</div>
-			</div>
-
-			<div class="person-social-account">
-				<div class="item">
-					<%= image_tag 'social-twitter.png',width: 29 %>
-				</div>
-				<div class="item">
-					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
-				</div>
-			</div>
-
-			<div class="person-social-account">
-				<div class="item">
-					<%= image_tag 'social-pinterest.png',width: 29 %>
-				</div>
-				<div class="item">
-					<a href="" target="_blank">http://www.facebook.com/dshjkfhjkds</a>
+					<a href="{{social.uri}}" target="_blank">{{social.uri}}</a>
 				</div>
 			</div>
 
@@ -163,7 +137,7 @@
 
 			</div>
 
-			<span ng:init="chimes.get()"></span>
+			<span ng:init="chimes.get({user_id: params.id})"></span>
 
 			<div class="chime-container" ng:repeat="chime in chimes.list | orderBy:'-updated_at'">
 

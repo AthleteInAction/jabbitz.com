@@ -14,9 +14,7 @@ module Api
         q = "SELECT * FROM <%= name %>s"
         q << Tools.query(params)
 
-        @<%= name %>s = Chime.find_by_sql q
-
-  			@<%= name %>s = <%= name.capitalize %>.find_by_sql Tools.query(params)
+  			@<%= name %>s = <%= name.capitalize %>.find_by_sql q
 
   			respond_with @<%= name %>s,root: :<%= name %>s
 

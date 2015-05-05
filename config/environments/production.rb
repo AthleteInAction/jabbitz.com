@@ -17,13 +17,13 @@ Rails.application.configure do
   # config.active_record.dump_schema_after_migration = false
 
   # APP NAME
-  APP_NAME = 'Jabbitz'
+  APP_NAME = 'Jabitz'
 
   # PAGE TITLE
   TITLE = "#{APP_NAME}"
 
   # AUTH
-  AUTH = {'jabbitz' => 'marinucci83'}
+  AUTH = {'jabitz' => 'marinucci83'}
 
   # ENV
   E = Rails.env

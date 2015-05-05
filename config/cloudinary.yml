@@ -1,19 +1,19 @@
 ---
 development:
-  cloud_name: wambl
-  api_key: '934675884267723'
-  api_secret: AUuvgMsZAPd-0u1JlXN0vBcokuU
+  cloud_name: www-jabitz-com
+  api_key: '617632437929693'
+  api_secret: yb70EVTDFC8rPsrcgl7lCFcVZ9w
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: wambl
-  api_key: '934675884267723'
-  api_secret: AUuvgMsZAPd-0u1JlXN0vBcokuU
+  cloud_name: www-jabitz-com
+  api_key: '617632437929693'
+  api_secret: yb70EVTDFC8rPsrcgl7lCFcVZ9w
   enhance_image_tag: true
   static_image_support: true
 staging:
-  cloud_name: wambl
-  api_key: '934675884267723'
-  api_secret: AUuvgMsZAPd-0u1JlXN0vBcokuU
+  cloud_name: www-jabitz-com
+  api_key: '617632437929693'
+  api_secret: yb70EVTDFC8rPsrcgl7lCFcVZ9w
   enhance_image_tag: true
   static_image_support: false

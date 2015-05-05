@@ -4,12 +4,23 @@ module Tools
 
 	def query params
 
+    limit = 100
+    start = 0
+
+    limit = params[:limit].to_i if params[:limit] && params[:limit] != ''
+
+    page = 1
+
+    page = params[:page].to_i if params[:page] && params[:page] != ''
+
+    start = (page-1) * limit
+
 		q = ""
 
     list = []
     params.each_with_index do |(key,val),i|
 
-      if !['action','controller','format'].include?(key)
+      if !['action','controller','format','limit','page'].include?(key)
 
         type = 'AND'
         type = 'OR' if val[0] == '|'
@@ -30,7 +41,7 @@ module Tools
     q << list.join('')
     q << ")" if list.count > 0
 
-    q << ' LIMIT 200'
+    q << " LIMIT #{start},#{limit}"
 
     q
 

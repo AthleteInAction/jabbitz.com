@@ -11,13 +11,13 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
 
   # APP NAME
-  APP_NAME = 'Jabbitz'
+  APP_NAME = 'Jabitz'
 
   # PAGE TITLE
-  TITLE = "#{APP_NAME} [Staging]"
+  TITLE = "#{APP_NAME} [Beta]"
 
   # AUTH
-  AUTH = {'jabbitz' => 'marinucci83'}
+  AUTH = {'jabitz' => 'marinucci83'}
 
   # ENV
   E = Rails.env

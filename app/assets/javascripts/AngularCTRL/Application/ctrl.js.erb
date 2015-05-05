@@ -49,7 +49,41 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 			});
 
-			if (CLEAN){scope.users.get(tmp);}
+			if (CLEAN){
+
+				scope.users.get(tmp,function(){
+
+					if (scope.users.list.length == 0){
+						scope.new_col = false;
+					} else {
+						scope.new_col = true;
+					}
+
+				});
+
+			}
+
+		};
+
+		scope.new_col = true;
+		scope.createPerson = function(){
+
+			scope.new_person = API.users.new(angular.copy(scope.search));
+			scope.new_person.author_id = scope.current_user.id;
+			scope.new_person.floating = true;
+			scope.new_person.password = 'floating';
+
+			scope.new_person.save(function(user,error){
+
+				if (!error){
+
+					window.location = '#/people/'+user.id;
+
+				} else {
+
+				}
+
+			});
 
 		};
 

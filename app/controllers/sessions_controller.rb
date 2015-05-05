@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
 		user = User.find_by_email params[:email]
 
-		if user && user.authenticate(params[:password])
+		if user && !user.floating && user.authenticate(params[:password])
 
 			session[:user_id] = user.id
 

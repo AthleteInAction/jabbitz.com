@@ -14,11 +14,11 @@ App.config(['$httpProvider',function($httpProvider){
 // API
 // ======================================================================
 // ======================================================================
-App.service('API',['BlankSVC','ChimeSVC','SocialSVC','UserSVC',function(BlankSVC,ChimeSVC,SocialSVC,UserSVC){
+App.service('API',['BlankSVC','SocialSVC','ChimeSVC','UserSVC',function(BlankSVC,SocialSVC,ChimeSVC,UserSVC){
 
 	// INSERT HERE
-	this.chimes = ChimeSVC.chimes;
 	this.socials = SocialSVC.socials;
+	this.chimes = ChimeSVC.chimes;
 	this.users = UserSVC.users;
 
 }]);

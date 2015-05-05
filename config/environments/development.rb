@@ -9,13 +9,13 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # APP NAME
-  APP_NAME = 'Jabbitz'
+  APP_NAME = 'Jabitz'
 
   # PAGE TITLE
   TITLE = "#{APP_NAME} [Local]"
 
   # AUTH
-  AUTH = {'jabbitz' => 'marinucci83'}
+  AUTH = {'jabitz' => 'marinucci83'}
 
   # ENV
   E = Rails.env

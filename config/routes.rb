@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   		namespace :v1 do
 
   			# API INSERT
-			resources :chime,path: 'chimes'
 			resources :social,path: 'socials'
+			resources :chime,path: 'chimes'
 			resources :user,path: 'users'
 			post 'users/:id',to: 'user#change_profile_image'
 

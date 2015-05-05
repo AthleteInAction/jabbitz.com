@@ -3,6 +3,8 @@
 	<li class="active">Find People</li>
 </ol>
 
+<alert type="warning" collapse="new_col">No results found. <a href="" ng:click="createPerson()">Click here to create this person</a>.</alert>
+
 <div class="well">
 
 	<div class="form-group">
@@ -31,10 +33,6 @@
 
 	<div class="form-group">
 		<input type="text" class="form-control" ng:model="search.zip_code" placeholder="ZIP / Postal Code" onenter="searchUsers()" />
-	</div>
-
-	<div class="form-group">
-		<input type="text" class="form-control" placeholder="Age" />
 	</div>
 
 	<div align="center"><button class="btn btn-default btn-lg" ng:click="searchUsers()">Search</button></div>
