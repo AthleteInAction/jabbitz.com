@@ -61,6 +61,10 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 						scope.new_col = true;
 					}
 
+					<% if !E.development? %>
+					_gaq.push(['_trackEvent','Search',scope.users.list.length,JSON.stringify(tmp)]);
+					<% end %>
+
 				});
 
 			}
