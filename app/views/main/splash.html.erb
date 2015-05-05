@@ -9,6 +9,11 @@
 
     <alert type="danger forever" ng:if="!validators.clean">
       <ul>
+        <% if @user.errors.any? %>
+          <% @user.errors.each do |field,message| %>
+            <li><%= field %> <%= message %></li>
+          <% end %>
+        <% end %>
         <li ng:repeat="(field,item) in validators" ng:if="item.e && (field != 'submitting' || field != 'clean')">{{item.m}}</li>
       </ul>
     </alert>
