@@ -11,6 +11,16 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 		JP('SPLASH');
 
+		$scope.$on('$viewContentLoaded',function(event){
+
+			JP($location.url());
+
+			<% if !E.development? %>
+				$window.ga('send','pageview',{page: $location.url()});
+			<% end %>
+
+		});
+
 		scope.$watch('signup',function(a,b,c){
 
 			scope.validateSignup();
