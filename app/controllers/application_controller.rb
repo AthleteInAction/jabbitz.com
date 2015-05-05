@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  before_filter :authenticate if E.production?
+  before_filter :authenticate if !E.development?
 
   before_filter :api_authorize,:authorize
 
