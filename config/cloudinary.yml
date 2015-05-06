@@ -17,3 +17,9 @@ staging:
   api_secret: yb70EVTDFC8rPsrcgl7lCFcVZ9w
   enhance_image_tag: true
   static_image_support: false
+beta:
+  cloud_name: www-jabitz-com
+  api_key: '617632437929693'
+  api_secret: yb70EVTDFC8rPsrcgl7lCFcVZ9w
+  enhance_image_tag: true
+  static_image_support: false

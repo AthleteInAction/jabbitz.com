@@ -23,5 +23,8 @@ development:
 staging:
   <<: *default
 
+beta:
+  <<: *default
+
 production:
   <<: *default

@@ -17,7 +17,7 @@ Rails.application.configure do
   TITLE = "#{APP_NAME} [Staging]"
 
   # AUTH
-  AUTH = {'jabitz' => 'marinucci83'}
+  AUTH = {'jabitz123' => 'marinucci83'}
 
   # ENV
   E = Rails.env
