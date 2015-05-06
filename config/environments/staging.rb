@@ -14,7 +14,7 @@ Rails.application.configure do
   APP_NAME = 'Jabitz'
 
   # PAGE TITLE
-  TITLE = "#{APP_NAME} [Staging]"
+  TITLE = "#{APP_NAME} [Beta]"
 
   # AUTH
   AUTH = {'jabitz123' => 'marinucci83'}
