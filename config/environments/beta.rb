@@ -8,16 +8,16 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
   config.active_support.deprecation = :stderr
   config.assets.raise_runtime_errors = true
-  # config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = :uglifier
 
   # APP NAME
   APP_NAME = 'Jabitz'
 
   # PAGE TITLE
-  TITLE = "#{APP_NAME} [Staging]"
+  TITLE = "#{APP_NAME} [Beta]"
 
   # AUTH
-  AUTH = {'jabitz' => 'marinucci83'}
+  AUTH = {'jabitz123' => 'marinucci83'}
 
   # ENV
   E = Rails.env
