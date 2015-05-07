@@ -143,5 +143,15 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 
 		};
 
+		scope.deleteChime = function(chime){
+
+			if (!confirm('Are you sure you want to delete this chime?\n\n'+chime.body_short)){
+				return false;
+			}
+
+			chime.delete();
+
+		};
+
 	}
 ];

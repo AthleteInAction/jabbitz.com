@@ -53,9 +53,13 @@
 
 				<!-- <div><span class="glyphicons glyphicons-edit">&#xe151</span></div> -->
 				<div class="chime-edit" ng:if="chime.author.id == current_user.id">
-					<a href="" ng:click="openChime(chime)">
+					<a class="edit" href="" ng:click="openChime(chime)">
 						<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
 					</a>
+					<a class="delete" href="" ng:click="deleteChime(chime)">
+						<span class="glyphicon glyphicon-remove-circle"></span>
+					</a>
+					<div class="CLEAR"></div>
 				</div>
 
 				<rating ng-model="chime.rating" max="max" readonly="true"></rating>
