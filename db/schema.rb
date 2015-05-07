@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505155833) do
+ActiveRecord::Schema.define(version: 20150507013315) do
 
   create_table "chimes", force: true do |t|
     t.string   "category"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20150505155833) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "author_id"
+    t.integer  "flagged",          default: 0
   end
 
   create_table "socials", force: true do |t|

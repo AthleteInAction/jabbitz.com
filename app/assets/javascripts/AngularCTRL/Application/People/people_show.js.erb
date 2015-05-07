@@ -153,5 +153,18 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 
 		};
 
+		scope.flag_col = {};
+		scope.flag = function(chime){
+
+			chime.update('flagged','true',function(data,error){
+
+				if (!error){
+					scope.flag_col[chime.id] = true;
+				}
+
+			});
+
+		};
+
 	}
 ];

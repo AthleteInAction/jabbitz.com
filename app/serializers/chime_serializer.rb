@@ -1,6 +1,6 @@
 class ChimeSerializer < ActiveModel::Serializer
 
-	attributes :id, :author_id, :user_id, :category, :rating, :interaction_date, :site, :body, :body_html, :body_short, :employer, :job_title, :location, :school, :created_at, :updated_at
+	attributes :id, :flagged, :author_id, :user_id, :category, :rating, :interaction_date, :site, :body, :body_html, :body_short, :employer, :job_title, :location, :school, :created_at, :updated_at
 
 	has_one :author,key: :author_id
 

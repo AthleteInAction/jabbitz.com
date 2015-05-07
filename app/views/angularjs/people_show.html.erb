@@ -70,6 +70,12 @@
 
 				<div class="chime-body" ng-bind-html="chime.body_html"></div>
 
+				<div class="chime-flag" collapse="flag_col[chime.id]">
+
+					<a href="" class="flag" ng:click="flag(chime)"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Spam or Innappropriate</a>
+
+				</div>
+
 			</div>
 
 		</td>

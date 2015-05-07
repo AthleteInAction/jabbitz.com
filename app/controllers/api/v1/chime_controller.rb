@@ -40,7 +40,21 @@ module Api
   		# =================================================
   		def update
 
-        if @chime.update(chime_params)
+        if params[:chime][:flagged] == 'true'
+
+          @chime.increment(:flagged)
+
+        end
+
+        new_params = {}
+
+        chime_params.each do |key,val|
+
+          new_params.merge! key => val if key.to_s != 'flagged'
+
+        end
+
+        if @chime.update(new_params)
 
           render json: @chime,status: :ok
 
@@ -104,7 +118,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def chime_params
-        params.require(:chime).permit :author_id, :user_id, :category, :rating, :interaction_date, :site, :body, :body_html, :body_short, :employer, :job_title, :location, :school, :created_at, :updated_at
+        params.require(:chime).permit :flagged, :author_id, :user_id, :category, :rating, :interaction_date, :site, :body, :body_html, :body_short, :employer, :job_title, :location, :school, :created_at, :updated_at
       end
 
   	end
