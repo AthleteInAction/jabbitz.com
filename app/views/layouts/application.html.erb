@@ -22,22 +22,38 @@
 				<div class="dashboard-nav-item">
 					
 					<ul class="dashboard-nav-bar">
-						<li>
-							<a href="/">Home</a>
+						<li class="nav-bar-item">
+							<a class="nav-bar-link" href="/">Home</a>
 						</li>
-						<li>
-							<a href="#/people">Find People</a>
+						<li class="nav-bar-item">
+							<a class="nav-bar-link" href="#/people">Find People</a>
 						</li>
-						<li>
-							<a href="">FAQ</a>
+						<li class="nav-bar-item">
+							<a class="nav-bar-link" href="">FAQ</a>
 						</li>
-						<li>
-							<a href="">Support</a>
+						<li class="nav-bar-item">
+							<a class="nav-bar-link" href="">Support</a>
 						</li>
-						<li>
-							<a href="#/myaccount" class="myaccount">
-								<img ng:src="{{current_user.image.thumb.url}}" />
-							</a>
+						<li class="nav-bar-item">
+							<span class="dropdown" dropdown>
+								<a href class="dropdown-toggle" dropdown-toggle>
+									<span class="glyphicon glyphicon-user"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#/myaccount">My&nbsp;Account</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="/access/logout">Logout</a>
+									</li>
+								</ul>
+							</span>
+							<!-- <a href="#/myaccount" class="myaccount">
+								<div class="arrow">
+									<span class="glyphicon glyphicon-user"></span>
+								</div>
+							</a> -->
 						</li>
 					</ul>
 
