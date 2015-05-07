@@ -193,6 +193,12 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						t.key[api_module.id] = api_module;
 						t.key[ID].id = ID;
 
+						angular.forEach(data.social,function(val,key){
+
+							api_module[key] = val;
+
+						});
+
 						if (complete){complete(data.social,false);}
 
 					},function(data){

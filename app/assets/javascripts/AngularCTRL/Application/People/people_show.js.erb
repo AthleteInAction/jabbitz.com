@@ -1,5 +1,5 @@
-var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window',
-	function($scope,$routeParams,$location,$timeout,$interval,API,$window){
+var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window','$modal',
+	function($scope,$routeParams,$location,$timeout,$interval,API,$window,$modal){
 
 		var scope = $scope;
 
@@ -63,7 +63,10 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 
 		};
 
+		scope.submitted = false;
 		scope.newChimeForm = function(){
+
+			scope.submitted = true;
 
 			if (scope.new_chime_form.$valid) {
 
@@ -107,6 +110,36 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 			}
 
 			return 'blank.png';
+
+		};
+
+		scope.openChime = function(chime){
+
+			var c = angular.copy(chime);
+
+			var modalInstance = $modal.open({
+				animation: true,
+				templateUrl: '/angularjs/templates/chime.html',
+				controller: 'ChimeCtrl',
+				size: null,
+				resolve: {
+					params: function(){
+						return scope.params;
+					},
+					current_user: function(){
+						return scope.$parent.current_user;
+					},
+					chime: function(){
+						return chime;
+					}
+				}
+			});
+
+			modalInstance.result.then(function(selectedItem){
+				scope.selected = selectedItem;
+			},function(){
+				chime = c;
+			});
 
 		};
 

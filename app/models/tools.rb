@@ -18,9 +18,18 @@ module Tools
 		q = ""
 
     list = []
+    order = ""
     params.each_with_index do |(key,val),i|
 
-      if !['action','controller','format','limit','page'].include?(key)
+        if key.to_s.downcase == 'order'
+
+            dir = 'ASC'
+            dir = 'DESC' if val.to_s.downcase.include?('-')
+            order = " ORDER BY #{val.gsub('-','')} #{dir}"
+
+        end
+
+      if !['action','controller','format','limit','page','order'].include?(key)
 
         type = 'AND'
         type = 'OR' if val[0] == '|'
@@ -40,6 +49,8 @@ module Tools
     q << " WHERE (" if list.count > 0
     q << list.join('')
     q << ")" if list.count > 0
+
+    q << order
 
     q << " LIMIT #{start},#{limit}"
 

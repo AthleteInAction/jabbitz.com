@@ -193,6 +193,12 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						t.key[api_module.id] = api_module;
 						t.key[ID].id = ID;
 
+						angular.forEach(data.user,function(val,key){
+
+							api_module[key] = val;
+
+						});
+
 						if (complete){complete(data.user,false);}
 
 					},function(data){

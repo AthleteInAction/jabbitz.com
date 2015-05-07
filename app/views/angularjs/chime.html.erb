@@ -1,0 +1,91 @@
+<div class="chime-modal">
+<form name="new_chime_form" novalidate ng:submit="newChimeForm()">
+
+	<div class="form-group">
+
+		<div><label>Category:</label></div>
+		<select name="category" ng:model="new_chime.category" class="form-control" required>
+			<option value="">Select a Category</option>
+			<option value="dating">Dating</option>
+			<option value="employment">Employment</option>
+			<option value="school">School</option>
+			<option value="other">Other</option>
+		</select>
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category && new_chime.category != ''" ng:class="{'has-error':new_chime_form.interaction_date.$error.required && submitted}">
+
+		<div><label>Date of interaction:</label></div>
+		<div class="row">
+			<div class="col-md-6">
+				<p class="input-group">
+					<input type="text" name="interaction_date" class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="new_chime.interaction_date" is-open="opened" show-weeks="false" readonly required placeholder="" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</p>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category && new_chime.category != ''">
+
+		<div><label>Rate your experience:</label></div>
+		<rating ng-model="new_chime.rating" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+		<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent/10}}/10</span>
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category == 'dating'" ng:class="{'has-error':(new_chime_form.site.$error.required || new_chime_form.site.$error.pattern) && submitted}">
+
+		<div><label>Dating Site:</label></div>
+		<input type="text" class="form-control" name="site" required ng:pattern="/^(http:\/\/|https:\/\/)/" ng:model="new_chime.site" placeholder="http://" />
+		<alert type="warning sm" ng:if="(new_chime_form.site.$error.required || new_chime_form.site.$error.pattern) && submitted">Please enter a valid URL. Must start with "http://" or "https://".</alert>
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category == 'employment'" ng:class="{'has-error':new_chime_form.employer.$error.required && submitted}">
+
+		<div><label>Employer:</label></div>
+		<input type="text" class="form-control" required name="employer" ng:model="new_chime.employer" placeholder="" />
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category == 'employment'" ng:class="{'has-error':new_chime_form.job_title.$error.required && submitted}">
+
+		<div><label>Job Title:</label></div>
+		<input type="text" class="form-control" required name="job_title" ng:model="new_chime.job_title" placeholder="" />
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category == 'school'" ng:class="{'has-error':new_chime_form.school.$error.required && submitted}">
+
+		<div><label>School:</label></div>
+		<input type="text" class="form-control" required name="school" ng:model="new_chime.school" placeholder="" />
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category == 'employment' || new_chime.category == 'school' || new_chime.category == 'other'" ng:class="{'has-error':new_chime_form.location.$error.required && submitted}">
+
+		<div><label>City:</label></div>
+		<input type="text" class="form-control" required name="location" ng:model="new_chime.location" placeholder="Example: San Jose, CA" />
+
+	</div>
+
+	<div class="form-group" ng:if="new_chime.category && new_chime.category != ''" ng:class="{'has-error':new_chime_form.body.$error.required && submitted}">
+
+		<div><label>Describe your experience:</label></div>
+		<textarea name="body" ng:model="new_chime.body" class="form-control" required placeholder=""></textarea>
+
+	</div>
+
+	<alert type="danger" ng:if="!new_chime_form.$valid && submitted">All fields are required.</alert>
+
+	<button class="btn btn-default" ng:if="new_chime.category && new_chime.category != '' && is_new">Submit</button>
+	<button class="btn btn-default" ng:if="new_chime.category && new_chime.category != '' && !is_new">Save</button>
+	<a href="" class="btn btn-danger" ng:click="close()">Cancel</a>
+
+</form>
+</div>

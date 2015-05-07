@@ -1,0 +1,89 @@
+var ChimeCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window','$modal','params','current_user','$modalInstance','chime',
+	function($scope,$routeParams,$location,$timeout,$interval,API,$window,$modal,params,current_user,$modalInstance,chime){
+
+		JP('ChimeCtrl');
+
+		var scope = $scope;
+		scope.params = params;
+
+		scope.is_new = false;
+		if (chime){
+			scope.new_chime = chime;
+		} else {
+			scope.new_chime = API.chimes.new({
+				author_id: current_user.id,
+				user_id: scope.params.id
+			});
+			scope.is_new = true;
+		}
+
+		scope.today = function() {
+			scope.new_chime.interaction_date = new Date();
+		};
+
+		scope.clear = function () {
+			scope.new_chime.interaction_date = null;
+		};
+
+		scope.max = 10;
+		scope.isReadonly = false;
+
+		$scope.hoveringOver = function(value){
+
+			scope.overStar = value;
+			scope.percent = 100 * (value / scope.max);
+
+		};
+
+		scope.ratingStates = [
+			{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+			{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+			{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+			{stateOn: 'glyphicon-heart'},
+			{stateOff: 'glyphicon-off'}
+		];
+
+		scope.open = function($event){
+			
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			scope.opened = true;
+
+		};
+
+		scope.submitted = false;
+		scope.newChimeForm = function(){
+
+			scope.submitted = true;
+
+			if (scope.new_chime_form.$valid) {
+
+				JP('VALID');
+
+				scope.new_chime.save(function(data,error){
+
+					if (!error){
+
+						scope.close();
+
+					}
+
+				});
+
+			} else {
+
+				JP('INVALID');
+
+			}
+
+		};
+
+		scope.close = function(){
+
+			$modalInstance.dismiss('cancel');
+
+		};
+
+	}
+];

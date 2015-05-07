@@ -193,6 +193,12 @@ App.service('ChimeSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 						t.key[api_module.id] = api_module;
 						t.key[ID].id = ID;
 
+						angular.forEach(data.chime,function(val,key){
+
+							api_module[key] = val;
+
+						});
+
 						if (complete){complete(data.chime,false);}
 
 					},function(data){
