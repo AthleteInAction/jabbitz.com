@@ -17,6 +17,17 @@
 
 ga('create', 'UA-62597957-1', 'auto');
 ga('send', 'pageview');
+
+var track = function(a,b,c,d,e){
+
+	ga(a,b,c,d,e);
+
+};
 <% else %>
 var NO_GOOGLE = true;
+var track = function(a,b,c,d,e){
+
+	return false;
+
+};
 <% end %>

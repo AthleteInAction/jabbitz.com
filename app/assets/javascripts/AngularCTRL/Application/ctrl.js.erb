@@ -60,10 +60,8 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 					} else {
 						scope.new_col = true;
 					}
-
-					<% if !E.development? %>
-					ga('send','event','Search','People',JSON.stringify({n: scope.users.list.length,v: tmp}),scope.users.list.length);
-					<% end %>
+					
+					track('send','event','Search','People',JSON.stringify({n: scope.users.list.length,v: tmp}),scope.users.list.length);
 
 				});
 

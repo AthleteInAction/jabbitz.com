@@ -61,6 +61,13 @@ var ChimeCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API
 
 				JP('VALID');
 
+				var n = 'update';
+				if (scope.is_new){
+					n = 'create';
+				}
+
+				track('send','event','Chime','Save',n);
+
 				scope.new_chime.save(function(data,error){
 
 					if (!error){
