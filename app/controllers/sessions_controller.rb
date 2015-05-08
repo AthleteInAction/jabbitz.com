@@ -32,6 +32,8 @@ class SessionsController < ApplicationController
 
 		session.delete :user_id
 
+		reset_session if params[:reset] == 'true'
+
 		redirect_to root_url, flash: {warning: 'You have been logged out!'}
 
 	end
