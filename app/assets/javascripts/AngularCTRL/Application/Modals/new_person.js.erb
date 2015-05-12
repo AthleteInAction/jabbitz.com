@@ -1,0 +1,49 @@
+var NewPersonCtrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window','$modal','params','current_user','$modalInstance','person',
+	function($scope,$routeParams,$location,$timeout,$interval,API,$window,$modal,params,current_user,$modalInstance,person){
+
+		JP('ChimeCtrl');
+
+		var scope = $scope;
+		scope.params = params;
+
+		scope.socials = [];
+
+		scope.person = API.users.new(angular.copy(person));
+		scope.person.floating = 'true';
+		scope.person.password = 'floating';
+		scope.person.author_id = current_user.id;
+
+		scope.submitted = false;
+		scope.newPersonForm = function(){
+
+			scope.submitted = true;
+
+			if (scope.new_person_form.$valid){
+
+				scope.person.save(function(user,error){
+
+					if (!error){
+
+						scope.close();
+						window.location = '#/people/'+user.id;
+
+					}
+
+				});
+
+			} else {
+
+				JP('IN-VALID');
+
+			}
+
+		};
+
+		scope.close = function(){
+
+			$modalInstance.dismiss('cancel');
+
+		};
+
+	}
+];

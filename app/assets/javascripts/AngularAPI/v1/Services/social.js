@@ -218,9 +218,11 @@ App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 					Item.$create(options,function(data){
 
-						api_module.id = data.social.id;
-						api_module.created_at = data.social.created_at;
-						api_module.updated_at = data.social.updated_at;
+						angular.forEach(data.social,function(val,key){
+
+							api_module[key] = val;
+
+						});
 
 						delete api_module.loading;
 

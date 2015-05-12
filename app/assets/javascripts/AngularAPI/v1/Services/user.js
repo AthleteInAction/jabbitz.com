@@ -12,10 +12,10 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 			var t = this;
 			
-			if (t.key[id]){
-				if (complete){complete(t.key[id],false);}
-				return false;
-			}
+			// if (t.key[id]){
+			// 	if (complete){complete(t.key[id],false);}
+			// 	return false;
+			// }
 
 			var obj = t.new({id: id});
 
@@ -38,7 +38,7 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 				t.key[obj.id] = obj;
 
-				if (complete){complete(obj,false);}
+				if (complete){complete(data.user,false);}
 
 				delete obj.loading;
 
@@ -218,9 +218,11 @@ App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 					Item.$create(options,function(data){
 
-						api_module.id = data.user.id;
-						api_module.created_at = data.user.created_at;
-						api_module.updated_at = data.user.updated_at;
+						angular.forEach(data.user,function(val,key){
+
+							api_module[key] = val;
+
+						});
 
 						delete api_module.loading;
 

@@ -17,7 +17,7 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 			scope.$parent.users.find(scope.params.id,function(user,error){
 
 				if (!error){
-					scope.user = user;
+					scope.user = API.users.new(user);
 				}
 
 			});

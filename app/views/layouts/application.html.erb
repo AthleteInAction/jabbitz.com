@@ -72,6 +72,8 @@
 			<% flash.each do |type,message| %>
 				<alert type="<%= type %>"><%= message %></alert>
 			<% end %>
+
+			<alert type="{{alert.type}}" ng:if="alert">{{alert.message}}</alert>
 			
 			<div ng:view></div>
 

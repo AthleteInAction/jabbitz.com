@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 	get '/access/logout',to: 'sessions#destory', as: 'logout'
 	get '/access/normal',to: 'sessions#new', as: 'login'
 	post '/access/normal',to: 'sessions#create'
+	get '/access/request',to: 'sessions#request_password_reset', as: 'request'
+	post '/access/request',to: 'sessions#request_password_send_email'
+	get '/access/new_password',to: 'sessions#set_new_password', as: 'new_password'
+	post '/access/new_password',to: 'sessions#change_password'
 
 	get 'angularjs/templates/:page',to: 'angularjs#index'
 

@@ -4,6 +4,10 @@
 	<li class="active">{{user.name}}</li>
 </ol>
 
+<a href="#/people/{{user.id}}/edit" class="btn btn-danger" ng:if="user.author_id == current_user.id && user.floating">
+	<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
+</a>
+
 <table class="myaccount-table">
 	<tr>
 		<th><h3>Profile Picture</h3></th>
@@ -18,7 +22,8 @@
 		<td class="person-info">
 
 			<div class="person-item person-name">
-				<span class="name">{{user.name}}</span><span class="age" ng:if="user.birth_year">,&nbsp;48</span>
+				<span class="name">{{user.name}}</span>
+				<!-- <span class="age" ng:if="user.birth_year">{{date.getFullYear() - user.birth_year}}</span> -->
 			</div>
 			<div class="person-item person-location">
 				<span class="city" ng:if="user.city">{{user.city}}</span><span class="state" ng:if="user.state"><span ng:if="user.city">,&nbsp;</span>{{user.state}}</span>

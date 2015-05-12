@@ -5,4 +5,5 @@
 	<div class="form-group"><%= submit_tag 'Log In',class: 'btn btn-default' %></div>
 
 <% end %>
-<%= link_to "Sign Up", root_url %>
+<% path = request_path %>
+<%= link_to "Sign Up", root_path %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to 'Forgot Password?',path %>

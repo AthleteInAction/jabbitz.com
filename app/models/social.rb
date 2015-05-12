@@ -1,7 +1,21 @@
 class Social < ActiveRecord::Base
 
-	attr_accessible :user_id,:uri,:created_at,:updated_at
+	before_create :set_uri
 
-	validates_presence_of :user_id, :uri
+	attr_accessible :user_id,:category,:profile,:uri,:created_at,:updated_at
+
+	validates_presence_of :user_id, :category, :profile
+
+	def set_uri
+
+		self.profile = self.profile.gsub(' ','')
+
+		if self.profile.scan(/\Ahttp:\/\/|\Ahttps:\/\//i).count > 0
+			self.uri = self.profile
+		else
+			self.uri = "https://www.#{self.category}.com/#{self.profile}"
+		end
+
+	end
 
 end

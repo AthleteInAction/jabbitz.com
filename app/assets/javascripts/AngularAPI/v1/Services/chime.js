@@ -218,9 +218,11 @@ App.service('ChimeSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 					Item.$create(options,function(data){
 
-						// api_module.id = data.chime.id;
-						// api_module.created_at = data.chime.created_at;
-						// api_module.updated_at = data.chime.updated_at;
+						angular.forEach(data.chime,function(val,key){
+
+							api_module[key] = val;
+
+						});
 
 						delete api_module.loading;
 

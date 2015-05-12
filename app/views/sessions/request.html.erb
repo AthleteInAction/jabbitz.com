@@ -1,0 +1,7 @@
+<%= form_tag request_path do |f| %>
+	
+	<div class="form-group"><%= text_field_tag :email,nil,class: 'form-control',placeholder: 'Email' %></div>
+	<div class="form-group"><%= submit_tag 'Request Password Reset',class: 'btn btn-default' %></div>
+
+<% end %>
+<%= link_to 'Login',login_path %>

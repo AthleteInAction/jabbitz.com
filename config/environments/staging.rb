@@ -10,6 +10,9 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
   # config.assets.js_compressor = :uglifier
 
+  # URI
+  SITE_URI = 'http://staging.jabitz.com'
+
   # APP NAME
   APP_NAME = 'Jabitz'
 
@@ -21,5 +24,15 @@ Rails.application.configure do
 
   # ENV
   E = Rails.env
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "mailer.jabitz.com",
+    :user_name => "postmaster@mailer.jabitz.com",
+    :password => "8ea42150dd74b9154216302ae0a3552f"
+  }
 
 end

@@ -43,6 +43,7 @@ class AjsGenerator < Rails::Generators::Base
   	final = "#{layout_name}"
 
   	final << "/:id" if detail == 'show'
+    final << "/:id/edit" if detail == 'edit'
 
   	final
 

@@ -11,8 +11,10 @@ module Api
   		# =================================================
   		def index
 
+        new_params = params.permit plist
+
         q = "SELECT * FROM <%= name %>s"
-        q << Tools.query(params)
+        q << Tools.query(new_params)
 
   			@<%= name %>s = <%= name.capitalize %>.find_by_sql q
 
@@ -104,7 +106,11 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def <%= name %>_params
-        params.require(:<%= name %>).permit :created_at, :updated_at
+        params.require(:<%= name %>).permit plist
+      end
+
+      def plist
+        [:created_at, :updated_at]
       end
 
   	end

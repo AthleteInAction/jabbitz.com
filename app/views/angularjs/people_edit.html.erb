@@ -1,0 +1,118 @@
+<ol class="breadcrumb">
+	<li><a href="#/">Home</a></li>
+	<li><a href="#/people">People</a></li>
+	<li><a href="#/people/{{user.id}}">{{user.name}}</a></li>
+	<li class="active">Edit</li>
+</ol>
+
+<a href="#/people/{{user.id}}" class="btn btn-success"><span class="glyphicon glyphicon-chevron-left"></span> Done Editing</a>
+
+<table class="myaccount-table">
+	<tr>
+		<th><h3>Profile Picture</h3></th>
+		<th><h3>Personal Information</h3></th>
+	</tr>
+	<tr>
+		<td>
+
+			<img ng:src="{{user.image.image.url}}" />
+			<div class="upload-btn">
+				<progressbar class="progress-striped" value="upload_pct" type="success" ng:if="upload_pct">{{upload_pct}}%</progressbar>
+				<button class="btn btn-default" ng:if="!upload_pct" ng-file-select ng-file-change="upload($files)">Change Photo</button>
+			</div>
+
+		</td>
+		<td>
+
+			<% field = 'name' %>
+			<div class="form-group callback">
+				<input ng:model="user.<%= field %>" onenter="user.update('<%= field %>',user.<%= field %>)" ng:blur="user.update('<%= field %>',user.<%= field %>)" type="text" class="form-control" placeholder="Full Name" />
+				<div class="callback-item" ng:if="user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':user.loading.<%= field %>==1,'icon_saved':user.loading.<%= field %>==2,'icon_error':user.loading.<%= field %>==3}"></div>
+				</div>
+			</div>
+
+			<% field = 'email' %>
+			<div class="form-group callback">
+				<input ng:model="user.<%= field %>" onenter="user.update('<%= field %>',user.<%= field %>)" ng:blur="user.update('<%= field %>',user.<%= field %>)" type="text" class="form-control" placeholder="Email" />
+				<div class="callback-item" ng:if="user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':user.loading.<%= field %>==1,'icon_saved':user.loading.<%= field %>==2,'icon_error':user.loading.<%= field %>==3}"></div>
+				</div>
+			</div>
+
+			<% field = 'phone' %>
+			<div class="form-group callback">
+				<input ng:model="user.<%= field %>" onenter="user.update('<%= field %>',user.<%= field %>)" ng:blur="user.update('<%= field %>',user.<%= field %>)" type="text" class="form-control" placeholder="Phone Number" />
+				<div class="callback-item" ng:if="user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':user.loading.<%= field %>==1,'icon_saved':user.loading.<%= field %>==2,'icon_error':user.loading.<%= field %>==3}"></div>
+				</div>
+			</div>
+
+			<% field = 'address' %>
+			<div class="form-group callback">
+				<input ng:model="user.<%= field %>" onenter="user.update('<%= field %>',user.<%= field %>)" ng:blur="user.update('<%= field %>',user.<%= field %>)" type="text" class="form-control" placeholder="Address" />
+				<div class="callback-item" ng:if="user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':user.loading.<%= field %>==1,'icon_saved':user.loading.<%= field %>==2,'icon_error':user.loading.<%= field %>==3}"></div>
+				</div>
+			</div>
+
+			<% field = 'city' %>
+			<div class="form-group callback">
+				<input ng:model="user.<%= field %>" onenter="user.update('<%= field %>',user.<%= field %>)" ng:blur="user.update('<%= field %>',user.<%= field %>)" type="text" class="form-control" placeholder="City" />
+				<div class="callback-item" ng:if="user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':user.loading.<%= field %>==1,'icon_saved':user.loading.<%= field %>==2,'icon_error':user.loading.<%= field %>==3}"></div>
+				</div>
+			</div>
+
+			<% field = 'state' %>
+			<div class="form-group callback">
+				<input ng:model="user.<%= field %>" onenter="user.update('<%= field %>',user.<%= field %>)" ng:blur="user.update('<%= field %>',user.<%= field %>)" type="text" class="form-control" placeholder="State" />
+				<div class="callback-item" ng:if="user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':user.loading.<%= field %>==1,'icon_saved':user.loading.<%= field %>==2,'icon_error':user.loading.<%= field %>==3}"></div>
+				</div>
+			</div>
+
+			<% field = 'zip_code' %>
+			<div class="form-group callback">
+				<input ng:model="user.<%= field %>" onenter="user.update('<%= field %>',user.<%= field %>)" ng:blur="user.update('<%= field %>',user.<%= field %>)" type="text" class="form-control" placeholder="ZIP / Postal Code" />
+				<div class="callback-item" ng:if="user.loading.<%= field %>">
+					<div class="" ng:class="{'icon_loading':user.loading.<%= field %>==1,'icon_saved':user.loading.<%= field %>==2,'icon_error':user.loading.<%= field %>==3}"></div>
+				</div>
+			</div>
+
+			<h3>Social Accounts</h3>
+			<ul class="social-list" ng:repeat="social in socials.list | orderBy:'created_at'">
+				<li>
+					<div class="social-list-wrap">
+						<div class="social-list-item">
+							<button class="btn btn-danger btn-xs" ng:class="{'DISABLE':social.loading}" ng:click="social.delete()">Remove</button>
+						</div>
+						<div class="social-list-item">
+							<img ng:src="/images/social-{{social.category}}.png" height="29" />
+							&nbsp;&nbsp;
+							<a href="{{social.uri}}" target="_blank">{{social.profile}}</a>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			<form name="new_social_form" ng:submit="saveSocial()">
+			<div class="form-group">
+					<select class="form-control" ng:model="new_social.category" name="category" required ng:change="focusTXT()">
+						<option value="">Select a Type:</option>
+						<option value="facebook">Facebook</option>
+						<option value="instagram">Instagram</option>
+						<option value="twitter">Twitter</option>
+						<option value="pinterest">Pinterest</option>
+						<option value="match">Match.com</option>
+						<option value="tinder">Tinder</option>
+					</select>
+
+					<input type="text" class="form-control socialTXT" name="profile" ng:model="new_social.profile" placeholder="Profile Name or URL" ng:class="{'DISABLE':new_social.loading}" required ng:if="new_social.category" />
+				<!-- <input ng:model="new_social.uri" onenter="saveSocial()" type="text" class="form-control" ng:disabled="new_social.loading" placeholder="Add Social Account" /> -->
+			</div>
+			</form>
+
+		</td>
+	</tr>
+</table>

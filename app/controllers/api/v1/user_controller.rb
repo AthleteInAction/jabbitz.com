@@ -11,8 +11,22 @@ module Api
   		# =================================================
   		def index
 
-        q = "SELECT * FROM users"
-        q << Tools.query(params)
+        new_params = params.permit plist
+        social = new_params[:social]
+
+        q = "SELECT users.* FROM users"
+        if !social || social.to_s.strip == ''
+          new_params.delete :social
+          q << Tools.query(new_params)
+        else
+          q << Tools.squery(new_params)
+        end
+
+        puts '----'*10
+        puts '----'*10
+        puts q
+        puts '----'*10
+        puts '----'*10
 
   			@users = User.find_by_sql q
 
@@ -40,6 +54,8 @@ module Api
   		# =================================================
   		def update
 
+        sleep 1 if E.development?
+
         if @user.update(user_params)
 
           render json: @user,status: :ok
@@ -59,6 +75,8 @@ module Api
   		# =================================================
   		# =================================================
   		def create
+
+        sleep 1 if E.development?
 
   			@user = User.new user_params
 
@@ -81,6 +99,8 @@ module Api
   		# =================================================
   		# =================================================
   		def destroy
+
+        sleep 1 if E.development?
 
         if @user.destroy
 
@@ -126,7 +146,11 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_params
-        params.require(:user).permit :last_active, :promo_code, :floating, :author_id, :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at
+        params.require(:user).permit plist
+      end
+
+      def plist
+        [:social, :birthdate, :last_active, :promo_code, :floating, :author_id, :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at]
       end
 
   	end

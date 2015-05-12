@@ -104,7 +104,7 @@ module Api
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def social_params
-        params.require(:social).permit :user_id,:uri,:created_at,:updated_at
+        params.require(:social).permit :category,:profile,:user_id,:uri,:created_at,:updated_at
       end
 
   	end

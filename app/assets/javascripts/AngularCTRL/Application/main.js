@@ -6,6 +6,13 @@ App.config(['$routeProvider','$locationProvider',function($routeProvider,$locati
 
 	$routeProvider
 	/* MARKER */  	
+	.when('/people/:id/edit',{
+
+		templateUrl : '/angularjs/templates/people_edit.html',
+		controller: PeopleEditCtrl
+
+	})
+  	
 	.when('/people/:id',{
 
 		templateUrl : '/angularjs/templates/people_show.html',

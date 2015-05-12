@@ -6,7 +6,7 @@ var MyaccountCtrl = ['$scope','$routeParams','$location','$timeout','$interval',
 		scope.params = $routeParams;
 
 		scope.socials = API.socials;
-		scope.socials.get();
+		scope.socials.get({user_id: scope.$parent.current_user.id});
 		scope.new_social = API.socials.new({user_id: scope.$parent.current_user.id});
 
 		scope.saveSocial = function(){

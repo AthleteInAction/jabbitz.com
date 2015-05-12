@@ -1,10 +1,12 @@
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // APPLICATION !!!!!!! APPLICATION !!!!!!! APPLICATION !!!!!!! APPLICATION !!!!!!! APPLICATION !!!!!!!
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window',
-	function($scope,$routeParams,$location,$timeout,$interval,API,$window){
+var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$window','$modal',
+	function($scope,$routeParams,$location,$timeout,$interval,API,$window,$modal){
 
 		var scope = $scope;
+
+		scope.date = new Date();
 
 		scope.months = months;
 		scope.days = days;
@@ -38,8 +40,8 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 				tmp[key] = val;
 
-				if (key == 'name' && val && val != ''){
-					tmp.name = '*'+val+'*';
+				if ((key == 'name' || key == 'social') && val && val != ''){
+					tmp[key] = '*'+val+'*';
 				}
 
 				if (!val || val == ''){
@@ -50,6 +52,7 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 				if (val || val != ""){CLEAN = true;}
 
 			});
+			JP(tmp);
 
 			if (CLEAN){
 
@@ -70,23 +73,44 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 		};
 
 		scope.new_col = true;
+		// scope.createPerson = function(){
+
+		// 	scope.new_person = API.users.new(angular.copy(scope.search));
+		// 	scope.new_person.author_id = scope.current_user.id;
+		// 	scope.new_person.floating = true;
+		// 	scope.new_person.password = 'floating';
+
+		// 	scope.new_person.save(function(user,error){
+
+		// 		if (!error){
+
+		// 			window.location = '#/people/'+user.id;
+
+		// 		} else {
+
+		// 		}
+
+		// 	});
+
+		// };
 		scope.createPerson = function(){
 
-			scope.new_person = API.users.new(angular.copy(scope.search));
-			scope.new_person.author_id = scope.current_user.id;
-			scope.new_person.floating = true;
-			scope.new_person.password = 'floating';
-
-			scope.new_person.save(function(user,error){
-
-				if (!error){
-
-					window.location = '#/people/'+user.id;
-
-				} else {
-
+			var modalInstance = $modal.open({
+				animation: true,
+				templateUrl: '/angularjs/templates/new_person.html',
+				controller: 'NewPersonCtrl',
+				size: null,
+				resolve: {
+					params: function(){
+						return scope.params;
+					},
+					current_user: function(){
+						return scope.current_user;
+					},
+					person: function(){
+						return scope.search;
+					}
 				}
-
 			});
 
 		};
