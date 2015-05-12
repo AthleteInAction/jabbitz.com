@@ -50,12 +50,14 @@ class SessionsController < ApplicationController
 
 	def request_password_send_email
 
-		@user = User.find_by_email params.require(:email)
+		email = params.require(:email)
+		
+		@user = User.find_by_email email
 
-		@user.token_expiration = Time.now + 10*60 # 10 minutes
-		@user.token = SecureRandom.urlsafe_base64
+		@user.token_expiration = Time.now + 10*60 if @user
+		@user.token = SecureRandom.urlsafe_base64 if @user
 
-		if @user.save
+		if @user && @user.save
 
 			UserMailer.request_password_reset(@user).deliver
 
@@ -68,7 +70,12 @@ class SessionsController < ApplicationController
 
 		else
 
-			render json: @user.errors,status: :unprocessable_entity
+			@message = {
+				type: 'danger',
+				text: "Could not find the email #{email} in our records."
+			}
+
+			render 'request',layout: 'splash'
 
 		end
 
