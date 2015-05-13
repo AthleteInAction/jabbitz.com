@@ -125,9 +125,23 @@
 					</div>
 				</li>
 			</ul>
+			
+			<form name="new_social_form" ng:submit="saveSocial()">
 			<div class="form-group">
-				<input ng:model="new_social.uri" onenter="saveSocial()" type="text" class="form-control" ng:disabled="new_social.loading" placeholder="Add Social Account" />
+					<select class="form-control" ng:model="new_social.category" name="category" required ng:change="focusTXT()">
+						<option value="">Select a Type:</option>
+						<option value="facebook">Facebook</option>
+						<option value="instagram">Instagram</option>
+						<option value="twitter">Twitter</option>
+						<option value="pinterest">Pinterest</option>
+						<option value="match">Match.com</option>
+						<option value="tinder">Tinder</option>
+					</select>
+
+					<input type="text" class="form-control socialTXT" name="profile" ng:model="new_social.profile" placeholder="Profile Name or URL" ng:class="{'DISABLE':new_social.loading}" required ng:if="new_social.category" />
+				<!-- <input ng:model="new_social.uri" onenter="saveSocial()" type="text" class="form-control" ng:disabled="new_social.loading" placeholder="Add Social Account" /> -->
 			</div>
+			</form>
 
 		</td>
 	</tr>
