@@ -38,11 +38,19 @@
 
 	</div>
 
-	<div class="form-group" ng:if="new_chime.category == 'dating'" ng:class="{'has-error':(new_chime_form.site.$error.required || new_chime_form.site.$error.pattern) && submitted}">
+	<div class="form-group" ng:if="new_chime.category == 'dating'" ng:class="{'has-error':(new_chime_form.site.$error.required || new_chime_form.other.$error.pattern || new_chime_form.other.$error.required) && submitted}">
 
 		<div><label>Dating Site:</label></div>
-		<input type="text" class="form-control" name="site" required ng:pattern="/^(http:\/\/|https:\/\/)/" ng:model="new_chime.site" placeholder="http://" />
-		<alert type="warning sm" ng:if="(new_chime_form.site.$error.required || new_chime_form.site.$error.pattern) && submitted">Please enter a valid URL. Must start with "http://" or "https://".</alert>
+		<select class="form-control" ng:model="new_chime.site" name="site" required>
+			<option value="">Select a Dating Site:</option>
+			<option value="https://www.match.com">Match.com</option>
+			<option value="https://www.tinder.com">Tinder</option>
+			<option value="https://www.eharmony.com">E-Harmony</option>
+			<option value="https://www.plentyoffish.com">Plenty Of Fish</option>
+			<option value="other">Other</option>
+		</select>
+		<input type="text" class="form-control" name="other" required ng:pattern="/^(http:\/\/|https:\/\/)/" ng:model="new_chime.other" placeholder="http://" ng:if="new_chime.site == 'other'" />
+		<alert type="warning sm" ng:if="(new_chime_form.other.$error.required || new_chime_form.other.$error.pattern) && submitted">Please enter a valid URL. Must start with "http://" or "https://".</alert>
 
 	</div>
 
