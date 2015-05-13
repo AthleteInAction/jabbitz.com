@@ -5,6 +5,13 @@ var PeopleCtrl = ['$scope','$routeParams','$location','$timeout','$interval','AP
 
 		scope.params = $routeParams;
 
+		if (scope.params.name && scope.params.name != ''){
+
+			scope.$parent.search.name = scope.params.name;
+			scope.$parent.searchUsers();
+
+		}
+
 		JP('PEOPLE');
 
 	}

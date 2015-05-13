@@ -115,6 +115,13 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 		};
 
+		scope.doQuickSearch = function(){
+
+			if (scope.quicksearch_form.$valid){
+				window.location = '#/people?name='+scope.search.name;
+			}
+
+		};
 		JP('APPLICATION');
 
 	}
