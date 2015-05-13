@@ -29,16 +29,16 @@
 				<span class="city" ng:if="user.city">{{user.city}}</span><span class="state" ng:if="user.state"><span ng:if="user.city">,&nbsp;</span>{{user.state}}</span>
 			</div>
 
-			<div class="person-social"><h3>Social Accounts</h3></div>
+			<div class="person-social" ng:if="socials && socials.list.length > 0"><h3>Social Accounts</h3></div>
 
 			<span ng:init="socials.get({user_id: params.id})"></span>
 
 			<div class="person-social-account" ng:repeat="social in socials.list">
 				<div class="item">
-					<img ng:src="/images/{{simage(social.uri)}}" width="29" />
+					<img ng:src="/images/social-{{social.category}}.png" width="29" />
 				</div>
 				<div class="item">
-					<a href="{{social.uri}}" target="_blank">{{social.uri}}</a>
+					<a href="{{social.uri}}" target="_blank">{{social.profile}}</a>
 				</div>
 			</div>
 
@@ -77,7 +77,7 @@
 
 				<div class="chime-flag" collapse="flag_col[chime.id]">
 
-					<a href="" class="flag" ng:click="flag(chime)"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Spam or Innappropriate</a>
+					<a href="" class="flag" ng:click="flag(chime)"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Spam&nbsp;/&nbsp;Innappropriate</a>
 
 				</div>
 

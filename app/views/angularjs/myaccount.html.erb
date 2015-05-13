@@ -36,6 +36,7 @@
 				</div>
 			</div>
 
+			<% if false %>
 			<% field = 'phone' %>
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="Phone Number" />
@@ -43,6 +44,7 @@
 					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
+			<% end %>
 
 			<label>Birthdate:</label>
 			<div class="form-group callback">
@@ -80,6 +82,7 @@
 
 			</div>
 
+			<% if false %>
 			<% field = 'address' %>
 			<div class="form-group callback">
 				<input ng:model="current_user.<%= field %>" onenter="current_user.update('<%= field %>',current_user.<%= field %>)" ng:blur="current_user.update('<%= field %>',current_user.<%= field %>)" type="text" class="form-control" placeholder="Address" />
@@ -87,6 +90,7 @@
 					<div class="" ng:class="{'icon_loading':current_user.loading.<%= field %>==1,'icon_saved':current_user.loading.<%= field %>==2,'icon_error':current_user.loading.<%= field %>==3}"></div>
 				</div>
 			</div>
+			<% end %>
 
 			<% field = 'city' %>
 			<div class="form-group callback">
