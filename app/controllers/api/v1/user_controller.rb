@@ -22,12 +22,6 @@ module Api
           q << Tools.squery(new_params)
         end
 
-        puts '----'*10
-        puts '----'*10
-        puts q
-        puts '----'*10
-        puts '----'*10
-
   			@users = User.find_by_sql q
 
   			respond_with @users,root: :users
@@ -150,7 +144,9 @@ module Api
       end
 
       def plist
-        [:social, :birthdate, :last_active, :promo_code, :floating, :author_id, :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at]
+        list = [:social, :birthdate, :last_active, :promo_code, :floating, :author_id, :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at]
+        list << :access if current_user.access > 0
+        list
       end
 
   	end
