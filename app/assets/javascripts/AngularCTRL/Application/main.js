@@ -1,4 +1,4 @@
-var App = angular.module('App',['ngRoute','ngResource','ngSanitize','ui.bootstrap','angularFileUpload']);
+var App = angular.module('App',['APIModule','ngRoute','ngResource','ngSanitize','ui.bootstrap','angularFileUpload']);
 App.value('$anchorScroll',angular.noop);
 App.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){
 

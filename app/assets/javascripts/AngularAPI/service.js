@@ -7,6 +7,10 @@ App.config(['$httpProvider',function($httpProvider){
 		csrf = $('meta[name=csrf-token]').attr('content');
 	}
 ]);
+AdminApp.config(['$httpProvider',function($httpProvider){
+		$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+	}
+]);
 // ======================================================================
 // ======================================================================
 
@@ -14,7 +18,8 @@ App.config(['$httpProvider',function($httpProvider){
 // API
 // ======================================================================
 // ======================================================================
-App.service('API',['BlankSVC','SocialSVC','ChimeSVC','UserSVC',function(BlankSVC,SocialSVC,ChimeSVC,UserSVC){
+angular.module('APIModule',['BlankModule','SocialModule','UserModule','ChimeModule'])
+.service('API',['BlankSVC','SocialSVC','ChimeSVC','UserSVC',function(BlankSVC,SocialSVC,ChimeSVC,UserSVC){
 
 	// INSERT HERE
 	this.socials = SocialSVC.socials;
@@ -23,6 +28,7 @@ App.service('API',['BlankSVC','SocialSVC','ChimeSVC','UserSVC',function(BlankSVC
 
 }]);
 // Placemarker
-App.service('BlankSVC',[function(){}]);
+angular.module('BlankModule',[])
+.service('BlankSVC',[function(){}]);
 // ======================================================================
 // ======================================================================

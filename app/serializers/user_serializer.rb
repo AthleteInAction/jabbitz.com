@@ -2,8 +2,6 @@ class UserSerializer < ActiveModel::Serializer
   
   attributes(
   	:id,
-  	:token_expiration,
-  	:token,
   	:last_active,
   	:floating,
   	:author_id,
@@ -16,6 +14,7 @@ class UserSerializer < ActiveModel::Serializer
   	:birth_month,
   	:birth_date,
   	:birth_year,
+    :age,
   	:phone,
   	:address,
   	:city,
@@ -25,5 +24,19 @@ class UserSerializer < ActiveModel::Serializer
   	:created_at,
   	:updated_at
   )
+
+  def age
+
+    if object.birthdate.present?
+      bd = object.birthdate.to_s
+      a = Date.parse bd
+      t = Time.now
+      b = Date.parse("#{t.year}-#{t.month}-#{t.day}")
+      ((b-a).to_f/365).floor
+    else
+      nil
+    end
+
+  end
   
 end

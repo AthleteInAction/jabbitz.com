@@ -1,4 +1,5 @@
-App.service('ChimeSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
+angular.module('ChimeModule',['ApiModelV1Module'])
+.service('ChimeSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 	this.chimes = {
 

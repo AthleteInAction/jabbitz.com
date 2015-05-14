@@ -23,7 +23,7 @@
 
 			<div class="person-item person-name">
 				<span class="name">{{user.name}}</span>
-				<!-- <span class="age" ng:if="user.birth_year">{{date.getFullYear() - user.birth_year}}</span> -->
+				<span class="age" ng:if="user.age">{{user.age}}</span>
 			</div>
 			<div class="person-item person-location">
 				<span class="city" ng:if="user.city">{{user.city}}</span><span class="state" ng:if="user.state"><span ng:if="user.city">,&nbsp;</span>{{user.state}}</span>

@@ -1,4 +1,5 @@
-App.factory('ApiModelV1',[
+angular.module('ApiModelV1Module',[])
+.factory('ApiModelV1',[
 	'$resource',function($resource){
 		return $resource("/api/v1/:one/:two/:three/:id/:a/:b/:c.json",
 			{

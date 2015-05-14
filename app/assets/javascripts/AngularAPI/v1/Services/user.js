@@ -1,4 +1,5 @@
-App.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
+angular.module('UserModule',['ApiModelV1Module'])
+.service('UserSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 	this.users = {
 

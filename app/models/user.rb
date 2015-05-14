@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
-	before_create :generate_token
+	before_create :generate_token,:set_birthdate
+	before_update :set_birthdate
 
 	has_secure_password
 
@@ -24,6 +25,15 @@ class User < ActiveRecord::Base
 	def password?
 
 		self.password.present?
+
+	end
+	def set_birthdate
+
+		if self.birth_year.present? && self.birth_date.present? && self.birth_month.present?
+			self.birthdate = "#{self.birth_year}-#{self.birth_month}-#{self.birth_date}"
+		else
+			self.birthdate = nil
+		end
 
 	end
 

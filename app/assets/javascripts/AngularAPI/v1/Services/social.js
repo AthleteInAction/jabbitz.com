@@ -1,4 +1,5 @@
-App.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
+angular.module('SocialModule',['ApiModelV1Module'])
+.service('SocialSVC',['ApiModelV1','$timeout',function(ApiModelV1,$timeout){
 
 	this.socials = {
 

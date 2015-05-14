@@ -28,4 +28,6 @@ Rails.application.routes.draw do
 
 	get 'angularjs/templates/:page',to: 'angularjs#index'
 
+	get 'admin',to: 'admin#index'
+
 end

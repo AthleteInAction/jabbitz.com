@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514021433) do
+ActiveRecord::Schema.define(version: 20150514061127) do
 
   create_table "chimes", force: true do |t|
     t.string   "category"
