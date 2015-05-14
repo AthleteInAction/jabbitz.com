@@ -13,6 +13,8 @@ var NewPersonCtrl = ['$scope','$routeParams','$location','$timeout','$interval',
 		scope.person.password = 'floating';
 		scope.person.author_id = current_user.id;
 
+		scope.emailValidate = emailValidate;
+
 		scope.submitted = false;
 		scope.newPersonForm = function(){
 

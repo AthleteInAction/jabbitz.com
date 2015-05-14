@@ -8,35 +8,35 @@
 <div class="well">
 
 	<div class="form-group">
-		<input type="text" class="form-control" ng:model="search.name" placeholder="Name" onenter="searchUsers()" />
+		<input type="text" class="form-control" ng:model="search.name" placeholder="Name" onenter="searchUsers()" ng:change="$parent.new_col = true" />
 	</div>
 
 	<div class="form-group">
-		<input type="text" class="form-control" ng:model="search.social" placeholder="Social Account" onenter="searchUsers()" />
-	</div>
-
-	<!-- <div class="form-group">
-		<input type="text" class="form-control" ng:model="search.email" placeholder="Email" onenter="searchUsers()" />
+		<input type="text" class="form-control" ng:model="search.social" placeholder="Social Account" onenter="searchUsers()" ng:change="$parent.new_col = true" />
 	</div>
 
 	<div class="form-group">
-		<input type="text" class="form-control" ng:model="search.phone" placeholder="Phone Number" onenter="searchUsers()" />
+		<input type="text" class="form-control" ng:model="search.email" placeholder="Email" onenter="searchUsers()" ng:change="$parent.new_col = true" />
 	</div>
 
 	<div class="form-group">
-		<input type="text" class="form-control" ng:model="search.address" placeholder="Address" onenter="searchUsers()" />
-	</div> -->
-
-	<div class="form-group">
-		<input type="text" class="form-control" ng:model="search.city" placeholder="City" onenter="searchUsers()" />
+		<input type="text" class="form-control" ng:model="search.phone" placeholder="Phone Number" onenter="searchUsers()" ng:change="$parent.new_col = true" />
 	</div>
 
 	<div class="form-group">
-		<input type="text" class="form-control" ng:model="search.state" placeholder="State / Province" onenter="searchUsers()" />
+		<input type="text" class="form-control" ng:model="search.address" placeholder="Address" onenter="searchUsers()" ng:change="$parent.new_col = true" />
 	</div>
 
 	<div class="form-group">
-		<input type="text" class="form-control" ng:model="search.zip_code" placeholder="ZIP / Postal Code" onenter="searchUsers()" />
+		<input type="text" class="form-control" ng:model="search.city" placeholder="City" onenter="searchUsers()" ng:change="$parent.new_col = true" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.state" placeholder="State / Province" onenter="searchUsers()" ng:change="$parent.new_col = true" />
+	</div>
+
+	<div class="form-group">
+		<input type="text" class="form-control" ng:model="search.zip_code" placeholder="ZIP / Postal Code" onenter="searchUsers()" ng:change="$parent.new_col = true" />
 	</div>
 
 	<div align="center"><button class="btn btn-default btn-lg" ng:click="searchUsers()">Search</button></div>

@@ -29,9 +29,12 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 		});
 
+		scope.new_col = true;
 		scope.searchUsers = function(){
 
 			JP('SEARCH');
+
+			scope.new_col = true;
 
 			var CLEAN = false;
 
@@ -52,7 +55,6 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 				if (val || val != ""){CLEAN = true;}
 
 			});
-			JP(tmp);
 
 			if (CLEAN){
 
@@ -60,6 +62,7 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 					if (scope.users.list.length == 0){
 						scope.new_col = false;
+						JP(scope.new_col);
 					} else {
 						scope.new_col = true;
 					}
@@ -72,27 +75,6 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 		};
 
-		scope.new_col = true;
-		// scope.createPerson = function(){
-
-		// 	scope.new_person = API.users.new(angular.copy(scope.search));
-		// 	scope.new_person.author_id = scope.current_user.id;
-		// 	scope.new_person.floating = true;
-		// 	scope.new_person.password = 'floating';
-
-		// 	scope.new_person.save(function(user,error){
-
-		// 		if (!error){
-
-		// 			window.location = '#/people/'+user.id;
-
-		// 		} else {
-
-		// 		}
-
-		// 	});
-
-		// };
 		scope.createPerson = function(){
 
 			var modalInstance = $modal.open({

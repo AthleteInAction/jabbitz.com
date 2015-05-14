@@ -8,6 +8,19 @@
 			<alert type="danger sm" ng:if="submitted && new_person_form.name.$error.required">Name is required.</alert>
 		</div>
 
+		<div class="form-group" ng:class="{'has-error':submitted && new_person_form.email.$error.pattern}">
+			<input type="text" name="email" ng:model="person.email" class="form-control" placeholder="Email" ng:pattern="emailValidate" />
+			<alert type="danger sm" ng:if="submitted && new_person_form.email.$error.pattern">Email is invalid.</alert>
+		</div>
+
+		<div class="form-group">
+			<input type="text" name="phone" ng:model="person.phone" class="form-control" placeholder="Phone Number" />
+		</div>
+
+		<div class="form-group">
+			<input type="text" name="address" ng:model="person.address" class="form-control" placeholder="Address" />
+		</div>
+
 		<div class="form-group">
 			<input type="text" name="city" ng:model="person.city" class="form-control" placeholder="City" />
 		</div>
