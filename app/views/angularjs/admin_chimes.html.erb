@@ -3,10 +3,10 @@
 	<li class="active">Chimes</li>
 </ol>
 
-<a href="" ng:click="getChimes()"><span class="glyphicon glyphicon-refresh"></span></a>
+<a href="" ng:click="getChimes()" ng:if="chimes.list.length > 0"><span class="glyphicon glyphicon-refresh"></span></a>
 
 <alert type="warning forever" ng:if="chimes.list.length == 0">
-	No Chimes found.
+	No Chimes found. <a href="" ng:click="getChimes()">Refresh&nbsp;<span class="glyphicon glyphicon-refresh"></span></a>
 </alert>
 
 <div class="chime-container" ng:repeat="chime in chimes.list | filter:greaterThan(0)">
