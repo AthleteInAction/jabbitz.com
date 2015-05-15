@@ -1,1 +1,42 @@
-ADMIN TEMPLATE - [{{params.id}}]
+<ol class="breadcrumb">
+	<li><a href="#/">Admin</a></li>
+	<li class="active">Chimes</li>
+</ol>
+
+<a href="" ng:click="getChimes()"><span class="glyphicon glyphicon-refresh"></span></a>
+
+<alert type="warning forever" ng:if="chimes.list.length == 0">
+	No Chimes found.
+</alert>
+
+<div class="chime-container" ng:repeat="chime in chimes.list | filter:greaterThan(0)">
+
+	<!-- <div><span class="glyphicons glyphicons-edit">&#xe151</span></div> -->
+	<div class="chime-edit">
+		<a class="edit" href="" ng:click="resetFlagged(chime)">
+			{{chime.flagged}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-refresh"></span>
+		</a>
+		<a class="delete" href="" ng:click="deleteChime(chime)">
+			<span class="glyphicon glyphicon-remove-circle"></span>
+		</a>
+		<div class="CLEAR"></div>
+	</div>
+
+	<div>Chime ID:&nbsp;{{chime.id}}</div>
+
+	<rating ng-model="chime.rating" max="10" readonly="true"></rating>
+
+	<div class="chime-name">
+		{{chime.author.name}}<span ng:if="chime.author.city">&nbsp;|&nbsp;{{chime.author.city}}</span><span ng:if="chime.author.state"><span ng:if="chime.author.city">,&nbsp;</span>{{chime.author.state}}</span>
+	</div>
+
+	<div class="chime-body" ng-bind-html="chime.body_html"></div>
+
+	<div class="chime-flag" collapse="flag_col[chime.id]">
+
+		<a href="" class="flag" ng:click="flag(chime)"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Spam&nbsp;/&nbsp;Innappropriate</a>
+
+	</div>
+
+</div>
+<a href="" ng:click="chimes.nextPage()" ng:if="chimes.meta.next_page">Load More</a>

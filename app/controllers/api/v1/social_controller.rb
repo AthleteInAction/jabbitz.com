@@ -11,12 +11,27 @@ module Api
   		# =================================================
   		def index
 
-        q = "SELECT * FROM socials"
-        q << Tools.query(params)
+     #    q = "SELECT * FROM socials"
+     #    q << Tools.query(params)
 
-  			@socials = Social.find_by_sql q
+  			# @socials = Social.find_by_sql q
+        q = Tools.query(params)
+        
+        @socials = Social.where(q)
+        .page(params[:page])
+        .per((params[:limit] || 100).to_i)
+        .order(params[:order])
 
-  			respond_with @socials,root: :socials
+        respond_with @socials,
+        root: :socials,
+        meta: {
+          current_page: @socials.current_page,
+          next_page: @socials.next_page,
+          prev_page: @socials.prev_page,
+          total_pages: @socials.total_pages,
+          total_count: @socials.total_count,
+          limit: (params[:limit].to_i || 100).to_i
+        }
 
   		end
   		# =================================================

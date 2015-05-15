@@ -5,7 +5,60 @@ var AdminChimesCtrl = ['$scope','$routeParams','$location','$timeout','$interval
 
 		scope.params = $routeParams;
 
+		scope.chimes = API.chimes;
+
+		scope.getChimes = function(){
+
+			scope.chimes.get({flagged: '>0',order: '-flagged',limit: 10});
+
+		};
+		scope.getChimes();
+
 		JP('ADMINCHIMES');
+
+		scope.deleteChime = function(chime){
+
+			if (!confirm('Are you sure you want to delete this chime?\n\nID: '+chime.id)){
+				return false;
+			}
+
+			chime.delete();
+
+		};
+
+		scope.resetFlagged = function(chime){
+
+			if (!confirm('Are you sure you want to set this Chime\'s ('+chime.id+') flag count to 0?')){
+				return false;
+			}
+
+			chime.update('flagged',0,function(){
+				JP('DONE!');
+			});
+
+		};
+
+		scope.flag = function(chime){
+
+			chime.update('flagged','true',function(data,error){
+
+				if (!error){
+					scope.getChimes();
+				}
+
+			});
+
+		};
+
+		scope.greaterThan = function(val){
+			return function(item){
+				if (item['flagged'] > val){
+					return true;
+				} else {
+					return false;
+				}
+			}
+		};
 
 	}
 ];

@@ -77,4 +77,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user_table
 
+  def admin_only
+
+    redirect_to root_url if current_user.access <= 0
+
+  end
+
 end

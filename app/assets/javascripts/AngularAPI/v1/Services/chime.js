@@ -9,6 +9,59 @@ angular.module('ChimeModule',['ApiModelV1Module'])
 
 		list: [],
 
+		meta: {},
+
+		input: {},
+
+		nextPage: function(complete){
+
+			var t = this;
+
+			if (!t.meta.next_page){
+				return false;
+			}
+
+			t.input.page = t.meta.next_page;
+
+			var t = this;
+
+			t.meta = {};
+
+			t.loading.get = true;
+
+			var options = {
+				one: 'chimes'
+			};
+
+			options = $.extend(options,t.input);
+
+			ApiModelV1.query(options,function(data){
+
+				angular.forEach(data.chimes,function(val,key){
+
+					t.list.push(t.new(val));
+					t.key[val.id] = t.new(val);
+
+				});
+
+				t.meta = data.meta;
+				
+				delete t.loading.get;
+
+				if (complete){complete(t.list,false);}
+
+			},function(data){
+
+				JP(data);
+
+				delete t.loading.get;
+
+				if (complete){complete(data,true);}
+
+			});
+
+		},
+
 		find: function(id,complete){
 
 			var t = this;
@@ -61,6 +114,10 @@ angular.module('ChimeModule',['ApiModelV1Module'])
 
 			var t = this;
 
+			t.meta = {};
+
+			t.input = params;
+
 			t.loading.get = true;
 
 			var options = {
@@ -82,6 +139,8 @@ angular.module('ChimeModule',['ApiModelV1Module'])
 				});
 
 				t.list = list;
+
+				t.meta = data.meta;
 				
 				delete t.loading.get;
 
@@ -138,7 +197,8 @@ angular.module('ChimeModule',['ApiModelV1Module'])
 
 				Item.$save(options,function(data){
 
-					api_module.x876[field] = new_value;
+					api_module.x876[field] = data.chime[field];
+					api_module[field] = data.chime[field];
 
 					api_module.loading[field] = 2;
 					$timeout(function(){

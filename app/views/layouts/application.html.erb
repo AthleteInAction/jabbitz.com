@@ -42,6 +42,9 @@
 									<span class="glyphicon glyphicon-user"></span>
 								</a>
 								<ul class="dropdown-menu">
+									<li ng:if="current_user.access > 0">
+										<a href="/admin/">Admin</a>
+									</li>
 									<li>
 										<a href="#/myaccount">My&nbsp;Account</a>
 									</li>

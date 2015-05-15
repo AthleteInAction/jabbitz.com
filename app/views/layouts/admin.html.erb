@@ -23,18 +23,13 @@
 					
 					<ul class="dashboard-nav-bar">
 						<li class="nav-bar-item">
-							<form name="quicksearch_form" ng:submit="doQuickSearch()">
-								<input type="text" class="form-control" placeholder="Find by Name" ng:model="search.name" name="name" required />
-							</form>
+							<a class="nav-bar-link" href="/">Jabitz</a>
 						</li>
 						<li class="nav-bar-item">
-							<a class="nav-bar-link" href="/">Home</a>
+							<a class="nav-bar-link" href="#/users">Users</a>
 						</li>
 						<li class="nav-bar-item">
-							<a class="nav-bar-link" href="#/people">Find People</a>
-						</li>
-						<li class="nav-bar-item">
-							<a class="nav-bar-link" href="">Support</a>
+							<a class="nav-bar-link" href="#/chimes">Chimes</a>
 						</li>
 						<li class="nav-bar-item">
 							<span class="dropdown" dropdown>
@@ -42,6 +37,9 @@
 									<span class="glyphicon glyphicon-user"></span>
 								</a>
 								<ul class="dropdown-menu">
+									<li ng:if="current_user.access > 0">
+										<a href="/admin/">Admin</a>
+									</li>
 									<li>
 										<a href="#/myaccount">My&nbsp;Account</a>
 									</li>

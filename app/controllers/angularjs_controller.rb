@@ -2,7 +2,7 @@ class AngularjsController < ApplicationController
 
 	def index
 
-		list = ['blank','admin_chimes','people_edit','people_show','people','myaccount','chime','new_person']
+		list = ['blank','admin_users','admin_chimes','people_edit','people_show','people','myaccount','chime','new_person']
 		list.delete 'blank'
 
 		page = params[:page] if list.include?(params[:page])

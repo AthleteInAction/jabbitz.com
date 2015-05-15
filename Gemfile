@@ -59,3 +59,4 @@ gem 'mysql2'
 gem "rmagick"
 gem "carrierwave"
 gem 'cloudinary'
+gem 'kaminari'

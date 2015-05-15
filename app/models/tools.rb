@@ -37,24 +37,27 @@ module Tools
         type = 'OR' if new_val[0] == '|'
         new_val.gsub!('|','')
         opp = '='
+        opp = '>' if new_val[0] == '>'
+        opp = '<' if new_val[0] == '<'
+        new_val.gsub!(/\>|\<|/,'') if opp == '>' || opp == '<'
         if new_val[0] == '*' || new_val[-1] == '*'
           new_val.gsub!('*','%')
           opp = 'LIKE'
         end
         list << " #{type} " if list.count > 0
-        list << "#{key} #{opp} '#{new_val}'"
+        ex = "#{key} #{opp} '#{new_val}'"
+        ex = "#{key} #{opp} #{new_val}" if opp == '>' || opp == '<'
+        list << ex
 
       end
 
     end
 
-    q << " WHERE (" if list.count > 0
     q << list.join('')
-    q << ")" if list.count > 0
 
-    q << order
+    # q << order
 
-    q << " LIMIT #{start},#{limit}"
+    # q << " LIMIT #{start},#{limit}"
 
     q
 

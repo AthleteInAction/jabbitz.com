@@ -15,6 +15,23 @@ App.directive('onStop',function(){
         });
     };
 });
+AdminApp.directive('onstop',function(){
+    return function (scope, element, attrs) {
+        element.bind('keyup', function (event) {
+
+            if (attrs.delay){
+                this.delay = attrs.delay;
+            } else {
+                this.delay = 1000;
+            }
+
+            if (this.timer){clearTimeout(this.timer);}
+            
+            this.timer = setTimeout(function(){scope.$eval(attrs.onstop);},this.delay);
+
+        });
+    };
+});
 
 App.directive('onenter',function(){
     return {

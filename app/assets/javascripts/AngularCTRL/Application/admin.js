@@ -5,7 +5,14 @@ AdminApp.config(['$routeProvider','$locationProvider',function($routeProvider,$l
 	// html5Mode: true;
 
 	$routeProvider
-	/* MARKER */  	
+	/* MARKER */
+	.when('/users',{
+
+		templateUrl : '/angularjs/templates/admin_users.html',
+		controller: AdminUsersCtrl
+
+	})
+
 	.when('/chimes',{
 
 		templateUrl : '/angularjs/templates/admin_chimes.html',

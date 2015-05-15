@@ -11,12 +11,23 @@ module Api
   		# =================================================
   		def index
 
-        q = "SELECT * FROM chimes"
-        q << Tools.query(params)
+        q = Tools.query(params)
 
-  			@chimes = Chime.find_by_sql q
+        @chimes = Chime.where(q)
+        .page(params[:page])
+        .per((params[:limit] || 100).to_i)
+        .order(params[:order])
 
-  			respond_with @chimes,root: :chimes
+  			respond_with @chimes,
+        root: :chimes,
+        meta: {
+          current_page: @chimes.current_page,
+          next_page: @chimes.next_page,
+          prev_page: @chimes.prev_page,
+          total_pages: @chimes.total_pages,
+          total_count: @chimes.total_count,
+          limit: (params[:limit] || 100).to_i
+        }
 
   		end
   		# =================================================
@@ -44,13 +55,17 @@ module Api
 
           @chime.increment(:flagged)
 
-        end
+          new_params = {}
 
-        new_params = {}
+          chime_params.each do |key,val|
 
-        chime_params.each do |key,val|
+            new_params.merge! key => val if key.to_s != 'flagged'
 
-          new_params.merge! key => val if key.to_s != 'flagged'
+          end
+
+        else
+
+          new_params = chime_params
 
         end
 

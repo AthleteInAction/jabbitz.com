@@ -11,20 +11,42 @@ module Api
   		# =================================================
   		def index
 
-        new_params = params.permit plist
-        social = new_params[:social]
+        nl = plist
+        nl << :ids
 
-        q = "SELECT users.* FROM users"
-        if !social || social.to_s.strip == ''
-          new_params.delete :social
-          q << Tools.query(new_params)
+        new_params = params.permit nl
+        new_params[:id] = new_params[:ids] if new_params[:ids].present?
+        new_params.delete :ids
+
+  			q = Tools.query(new_params)
+
+        if new_params[:profile].present?
+          @users = User.where(q)
+          .joins("JOIN socials ON users.id = socials.user_id")
+          .page(params[:page])
+          .per((params[:limit] || 100).to_i)
+          .order(params[:order])
         else
-          q << Tools.squery(new_params)
+          new_params.delete :profile
+          @users = User.where(q)
+          .page(params[:page])
+          .per((params[:limit] || 100).to_i)
+          .order(params[:order])
         end
 
-  			@users = User.find_by_sql q
+        puts '***---'*10
+        puts q
 
-  			respond_with @users,root: :users
+  			respond_with @users,
+        root: :users,
+        meta: {
+          current_page: @users.current_page,
+          next_page: @users.next_page,
+          prev_page: @users.prev_page,
+          total_pages: @users.total_pages,
+          total_count: @users.total_count,
+          limit: (params[:limit] || 100).to_i
+        }
 
   		end
   		# =================================================
@@ -144,7 +166,7 @@ module Api
       end
 
       def plist
-        list = [:social, :birthdate, :last_active, :promo_code, :floating, :author_id, :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at]
+        list = [:profile, :birthdate, :last_active, :promo_code, :floating, :author_id, :name, :email, :password, :password_confirmation, :gender, :birth_month, :birth_date, :birth_year, :phone, :address, :city, :state, :zip_code, :created_at, :updated_at]
         list << :access if current_user.access > 0
         list
       end
