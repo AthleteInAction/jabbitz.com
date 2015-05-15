@@ -5,7 +5,7 @@ App.directive('onStop',function(){
         	if (attrs.delay){
         		this.delay = attrs.delay;
         	} else {
-        		this.delay = 1000;
+        		this.delay = 300;
         	}
 
         	if (this.timer){clearTimeout(this.timer);}
@@ -22,7 +22,7 @@ AdminApp.directive('onstop',function(){
             if (attrs.delay){
                 this.delay = attrs.delay;
             } else {
-                this.delay = 1000;
+                this.delay = 300;
             }
 
             if (this.timer){clearTimeout(this.timer);}

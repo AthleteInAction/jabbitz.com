@@ -34,9 +34,6 @@ module Api
           .order(params[:order])
         end
 
-        puts '***---'*10
-        puts q
-
   			respond_with @users,
         root: :users,
         meta: {

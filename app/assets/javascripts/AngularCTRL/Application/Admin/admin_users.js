@@ -12,7 +12,7 @@ var AdminUsersCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 		};
 		scope.sortVal = '-access';
 
-		scope.search = {limit: 30,order: scope.sortVal+',id'};
+		scope.search = {limit: 20,order: scope.sortVal+',id'};
 
 		scope.sortUsers = function(s){
 
@@ -54,8 +54,6 @@ var AdminUsersCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 
 		scope.searchUsers = function(){
 
-			scope.search.limit = 30;
-			scope.search.order = scope.sortVal+',id';
 			scope.getUsers();
 
 		};

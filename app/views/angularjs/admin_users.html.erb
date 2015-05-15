@@ -5,19 +5,35 @@
 
 <!-- <a href="" ng:click="getUsers()"><span class="glyphicon glyphicon-refresh"></span></a> -->
 
+<p class="help-block pull-left">Showing {{users.list.length}} of {{users.meta.total_count}}</p>
+<div class="pull-right">
+	<a href="" ng:click="getUsers()"><span class="glyphicon glyphicon-refresh"></span></a>
+</div>
 <table class="users-table table table-bordered table-condensed table-striped table-hover">
 	<tr>
-		<td colspan="2">
-			<input type="number" class="form-control" placeholder="ID" ng:model="search.ids" onstop="searchUsers()" />
+		<td width="60">
+			<input type="text" class="form-control input-sm" placeholder="ID" ng:model="search.ids" onstop="searchUsers()" />
+		</td>
+		<td align="center">
+			<select class="form-control input-sm" ng:model="search.access" ng:change="searchUsers()">
+				<option value="">All</option>
+				<option value="0">End-User</option>
+				<option value="1">Admin</option>
+			</select>
 		</td>
 		<td colspan="1">
-			<input type="text" class="form-control" placeholder="Name" ng:model="search.name" onstop="searchUsers()" />
+			<input type="text" class="form-control input-sm" placeholder="Name" ng:model="search.name" onstop="searchUsers()" />
 		</td>
 		<td colspan="1">
-			<input type="text" class="form-control" placeholder="Email" ng:model="search.email" onstop="searchUsers()" />
+			<input type="text" class="form-control input-sm" placeholder="Email" ng:model="search.email" onstop="searchUsers()" />
 		</td>
 		<td colspan="3">
-			<!-- <button class="btn btn-primary btn-block">Go</button> -->
+			<select class="form-control input-sm" ng:model="search.limit" ng:change="getUsers()">
+				<option value="10">Show: 10</option>
+				<option value="20">Show: 20</option>
+				<option value="50">Show: 50</option>
+				<option value="100">Show: 100</option>
+			</select>
 		</td>
 	</tr>
 	<tr>
@@ -39,12 +55,17 @@
 		<th>State</th>
 		<th><div align="center">FL</div></th>
 	</tr>
-	<tr ng:repeat="user in users.list">
+	<tr ng:if="users.list.length == 0">
+		<td colspan="7">
+			No results found.
+		</td>
+	</tr>
+	<tr class="" ng:repeat="user in users.list" ng:class="{'success':current_user.id==user.id}">
 		<td align="center">
-			<b>{{user.id}}</b>
+			<span>{{user.id}}</span>
 		</td>
 		<td align="center">
-			<select class="btn btn-default" ng:model="user.access" ng:change="user.update('access',user.access)">
+			<select class="btn" ng:class="{'btn-success':user.access>0,'btn-danger':user.access==0}" ng:model="user.access" ng:change="user.update('access',user.access)">
 				<option value="0">End-User</option>
 				<option value="1">Admin</option>
 			</select>
@@ -59,11 +80,18 @@
 			<input type="checkbox" ng:model="user.floating" disabled="disabled" />
 		</td>
 	</tr>
+	<tr ng:if="users.list.length > 0 && users.meta.next_page">
+		<td colspan="7">
+			<button class="btn btn-default btn-block" ng:click="users.nextPage()">
+				<span ng:if="!users.loading.get">Load More</span>
+				<%= image_tag 'icon-loading.gif','ng:if' => 'users.loading.get' %>
+			</button>
+
+			<alert type="success" ng:if="users.meta.current_page == users.meta.total_pages && !users.loading.get && users.meta.total_pages > 1">All items have been loaded.</alert>
+		</td>
+	</tr>
 </table>
-
-<button class="btn btn-default btn-block" ng:if="users.meta.next_page" ng:click="users.nextPage()">
-	<span ng:if="!users.loading.get">Load More</span>
-	<%= image_tag 'icon-loading.gif','ng:if' => 'users.loading.get' %>
-</button>
-
-<alert type="success" ng:if="users.meta.current_page == users.meta.total_pages && !users.loading.get && users.meta.total_pages > 1">All items have been loaded.</alert>
+<p class="help-block pull-left">Showing {{users.list.length}} of {{users.meta.total_count}}</p>
+<div class="pull-right">
+	<a href="" ng:click="getUsers()"><span class="glyphicon glyphicon-refresh"></span></a>
+</div>
