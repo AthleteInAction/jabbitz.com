@@ -28,11 +28,14 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :authentication => :plain,
-    :address => "smtp.mailgun.org",
+    :address => 'smtp.mailgun.org',
     :port => 587,
-    :domain => "mailer.jabitz.com",
-    :user_name => "postmaster@mailer.jabitz.com",
-    :password => "8ea42150dd74b9154216302ae0a3552f"
+    :domain => 'railgun.jabitz.com',
+    :user_name => 'postmaster@railgun.jabitz.com',
+    :password => '3709f280733116e7a7692b2919ab8593'
   }
+
+  # Zendesk
+  ZENDESK_DOMAIN = 'jabitz1431678410'
 
 end

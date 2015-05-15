@@ -13,6 +13,15 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 
 		scope.current_user = API.users.new(current_user);
 
+		zE(function(){
+			var zduser = {
+				name: scope.current_user['name'],
+				email: scope.current_user['email'],
+				external_id: scope.current_user['id']
+			};
+			zE.identify(zduser);
+		});
+
 		scope.location = $location.path().split('/');
 
 		scope.users = API.users;
@@ -104,6 +113,13 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 			}
 
 		};
+		
+		scope.help = function(){
+
+			zE.activate();
+
+		};
+
 		JP('APPLICATION');
 
 	}
