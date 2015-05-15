@@ -60,7 +60,7 @@
 
 		</td>
 	</tr>
-	<tr ng:if="chimes.list.length > 0">
+	<tr ng:if="chimes.list.length > 0 && chimes.meta.total_pages > 1">
 		<td colspan="2">
 			<button class="btn btn-default btn-block" ng:if="chimes.meta.next_page" ng:click="chimes.nextPage()">
 				<span ng:if="!chimes.loading.get">Load More</span>
