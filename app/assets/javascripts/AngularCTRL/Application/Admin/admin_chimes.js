@@ -7,7 +7,7 @@ var AdminChimesCtrl = ['$scope','$routeParams','$location','$timeout','$interval
 
 		scope.chimes = API.chimes;
 
-		scope.search = {limit: 20,order: '-flagged,-id',flagged: '>0'}
+		scope.search = {limit: 20,order: '-flagged,-id',flagged: '>0'};
 
 		scope.getChimes = function(){
 

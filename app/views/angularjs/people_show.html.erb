@@ -14,7 +14,7 @@
 		<th><h3>Personal Information</h3></th>
 	</tr>
 	<tr>
-		<td>
+		<td class="person-image">
 
 			<img ng:src="{{user.image.image.url}}" />
 
@@ -45,18 +45,87 @@
 		</td>
 	</tr>
 	<tr>
-		<th colspan="2"><h3>Chimes</h3></th>
+		<td colspan="2"><h3>Chimes</h3></td>
 	</tr>
-	<tr>
-		<td colspan="2">
+	<!-- <tr>
+		<td colspan="2" class="person-chimes">
 
 			<a href="" ng:click="openChime()">+ Add Chime</a>
+			<div>&nbsp;</div>
 
 			<span ng:init="chimes.get({user_id: params.id,order: '-id'})"></span>
 
-			<div class="chime-container" ng:repeat="chime in chimes.list">
+			<table class="users-table table table-bordered table-condensed table-hover">
+				<tr ng:repeat="chime in chimes.list">
+					<td>
 
-				<!-- <div><span class="glyphicons glyphicons-edit">&#xe151</span></div> -->
+						<div class="chime-container">
+
+							<div class="chime-edit" ng:if="chime.author.id == current_user.id">
+								<a class="edit" href="" ng:click="openChime(chime)">
+									<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
+								</a>
+								<a class="delete" href="" ng:click="deleteChime(chime)">
+									<span class="glyphicon glyphicon-remove-circle"></span>
+								</a>
+								<div class="CLEAR"></div>
+							</div>
+
+							<rating ng-model="chime.rating" max="max" readonly="true"></rating>
+
+							<div class="chime-name">
+								{{chime.author.name}}<span ng:if="chime.author.city">&nbsp;|&nbsp;{{chime.author.city}}</span><span ng:if="chime.author.state"><span ng:if="chime.author.city">,&nbsp;</span>{{chime.author.state}}</span>
+							</div>
+
+							<div class="chime-body" ng-bind-html="chime.body_html"></div>
+
+							<div class="chime-flag" collapse="flag_col[chime.id]">
+
+								<a href="" class="flag" ng:click="flag(chime)"><span class="glyphicon glyphicon-flag"></span>&nbsp;&nbsp;Spam&nbsp;/&nbsp;Innappropriate</a>
+
+							</div>
+
+						</div>
+
+					</td>
+				</tr>
+			</table>
+
+		</td>
+	</tr> -->
+</table>
+
+<span ng:init="chimes.get({user_id: params.id,order: '-id'})"></span>
+
+<p class="help-block pull-left">Showing {{chimes.list.length}} of {{chimes.meta.total_count}}</p>
+<div class="pull-right">
+	<a href="" ng:click="getChimes()"><span class="glyphicon glyphicon-refresh"></span></a>
+</div>
+
+<table class="users-table table table-bordered table-condensed">
+	<tr>
+		<td width="150">
+			<select class="form-control" ng:model="search.limit" ng:change="getChimes()">
+				<option value="10">Show: 10</option>
+				<option value="20">Show: 20</option>
+				<option value="50">Show: 50</option>
+				<option value="100">Show: 100</option>
+			</select>
+		</td>
+		<td align="right">
+			<button class="btn btn-success" ng:click="openChime()"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add&nbsp;Chime</button>
+		</td>
+	</tr>
+	<tr ng:if="chimes.list.length == 0">
+		<td colspan="2">
+			No results found.
+		</td>
+	</tr>
+	<tr ng:repeat="chime in chimes.list | filter:greaterThan(0)">
+		<td colspan="2">
+
+			<div class="chime-container">
+
 				<div class="chime-edit" ng:if="chime.author.id == current_user.id">
 					<a class="edit" href="" ng:click="openChime(chime)">
 						<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
@@ -85,4 +154,17 @@
 
 		</td>
 	</tr>
+	<tr ng:if="chimes.list.length > 0 && chimes.meta.total_pages > 1">
+		<td colspan="2">
+			<button class="btn btn-default btn-block" ng:if="chimes.meta.next_page" ng:click="chimes.nextPage()">
+				<span ng:if="!chimes.loading.get">Load More</span>
+				<%= image_tag 'icon-loading.gif','ng:if' => 'chimes.loading.get' %>
+			</button>
+			<alert type="success" ng:if="chimes.meta.current_page == chimes.meta.total_pages && !chimes.loading.get && chimes.meta.total_pages > 1">All items have been loaded.</alert>
+		</td>
+	</tr>
 </table>
+<p class="help-block pull-left">Showing {{chimes.list.length}} of {{chimes.meta.total_count}}</p>
+<div class="pull-right">
+	<a href="" ng:click="getChimes()"><span class="glyphicon glyphicon-refresh"></span></a>
+</div>

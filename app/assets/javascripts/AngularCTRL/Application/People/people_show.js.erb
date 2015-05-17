@@ -5,6 +5,8 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 
 		scope.params = $routeParams;
 		
+		scope.search = {};
+
 		scope.new_chime = API.chimes.new({
 			author_id: scope.$parent.current_user.id,
 			user_id: scope.params.id
@@ -12,12 +14,21 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 		scope.chimes = API.chimes;
 		scope.socials = API.socials;
 
+		scope.getChimes = function(){
+
+			scope.search.page = 1;
+			scope.chimes.get(scope.search);
+
+		};
+
 		scope.getUser = function(){
 
 			scope.$parent.users.find(scope.params.id,function(user,error){
 
 				if (!error){
 					scope.user = API.users.new(user);
+					scope.search = {limit: 10,order: '-id',user_id: scope.user.id};
+					scope.getChimes();
 				}
 
 			});
