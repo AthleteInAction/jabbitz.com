@@ -110,3 +110,69 @@
   </div>
 
 </div>
+
+
+<table class="myaccount-table">
+  <tr>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr>
+    <td>
+
+      <%= image_tag @p1.image.url %>
+
+    </td>
+    <td class="person-info">
+
+      <div class="person-item person-name">
+        <span class="name"><%= @p1.name %></span>
+      </div>
+      <div class="person-item person-location">
+        <span class="city"><%= @p1.city %></span><span class="state"><span>,&nbsp;</span><%= @p1.state %></span>
+      </div>
+
+      <div class="person-social"><h3>Social Accounts</h3></div>
+
+      <% @p1_socials.each do |social| %>
+      <div class="person-social-account">
+        <div class="item">
+          <img src="/images/social-<%= social.category %>.png" width="29" />
+        </div>
+        <div class="item">
+          <a href="<%= social.uri %>" target="_blank"><%= social.profile %></a>
+        </div>
+      </div>
+      <% end %>
+
+    </td>
+  </tr>
+  <tr>
+    <th colspan="2"><h3>Chimes</h3></th>
+  </tr>
+  <tr>
+    <td colspan="2">
+
+      <% @p1_chimes.each do |chime| %>
+      <div class="chime-container">
+
+        <% empty = 10 - chime.rating %>
+        <% chime.rating.times do %>
+          <span class="glyphicon glyphicon-star"></span>
+        <% end %>
+        <% empty.times do %>
+          <span class="glyphicon glyphicon-star-empty"></span>
+        <% end %>
+
+        <div class="chime-name">
+          <%= chime.author.name %>&nbsp;|&nbsp;<%= chime.author.city %></span><span><span>,&nbsp;</span><%= chime.author.state %></span>
+        </div>
+
+        <div class="chime-body"><%= chime.body %></div>
+
+      </div>
+      <% end %>
+
+    </td>
+  </tr>
+</table>

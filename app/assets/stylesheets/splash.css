@@ -3,4 +3,6 @@
 *= require_tree ./Splash
 *= require_self
 *= require_tree ./Global
+*= require_tree ./Application/Myaccount
+*= require_tree ./Application/People
 */

@@ -8,6 +8,12 @@ class MainController < ApplicationController
 
 			@user = User.new if user_table
 
+			id = EIDS[rand(0..EIDS.count-1)]
+
+			@p1 = User.find id
+			@p1_chimes = Chime.where user_id: id
+			@p1_socials = Social.where user_id: id
+
 			render 'splash',layout: 'splash'
 
 		else

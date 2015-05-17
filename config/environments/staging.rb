@@ -38,4 +38,7 @@ Rails.application.configure do
   # Zendesk
   ZENDESK_DOMAIN = 'jabitz1431678410'
 
+  # Splash Example IDs
+  EIDS = [172,162,152]
+
 end

@@ -16,7 +16,9 @@ var PeopleEditCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 			scope.$parent.users.find(scope.params.id,function(user,error){
 
 				if (!error){
-					if (user.author_id != scope.$parent.current_user.id || !user.floating){
+					if ((user.author_id == scope.$parent.current_user.id && user.floating) || scope.$parent.current_user.access > 0){
+
+					} else {
 						window.location = '#/people';
 					}
 					scope.user = API.users.new(user);
