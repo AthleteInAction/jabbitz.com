@@ -37,6 +37,12 @@ Rails.application.configure do
   ZENDESK_DOMAIN = 'jabitz1431678410'
 
   # Splash Example IDs
-  EIDS = [95]
+  EIDS = [172,162,152]
+
+  # Google API Key
+  GKEY = 'AIzaSyDdVQb2QOVd3keNLy7SCnugVlYBojfh-R4'
+
+  # Google Custom Search CX
+  GCX = '001317505772620924739%3Aqpshzvvflnm'
 
 end

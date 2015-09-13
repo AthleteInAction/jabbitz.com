@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   		namespace :v1 do
 
   			# API INSERT
+			resources :google,path: 'googles'
 			resources :social,path: 'socials'
 			resources :chime,path: 'chimes'
 			resources :user,path: 'users'

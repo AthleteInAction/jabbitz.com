@@ -56,3 +56,29 @@
 
 </a>
 <div class="CLEAR"></div>
+
+<div class="list-group">
+	<div class="list-group-item active">
+		Google Results
+	</div>
+	<a href="{{item.link}}" target="_blank" class="list-group-item" ng:repeat="item in googles.list">
+
+		<div ng-bind-html="item.htmlTitle"></div>
+
+		<div class="row" ng:if="item.pagemap.cse_image">
+			<div class="col-sm-1">
+				<img ng:src="{{item.pagemap.cse_image[0].src}}" class="img-responsive" />
+			</div>
+			<div class="col-sm-10">
+				<div class="text-muted" ng-bind-html="item.htmlSnippet"></div>
+				<div class="text-primary" ng-bind-html="item.htmlFormattedUrl"></div>
+			</div>
+		</div>
+
+		<div ng:if="!item.pagemap.cse_image">
+			<div class="text-muted" ng-bind-html="item.htmlSnippet"></div>
+			<div class="text-primary" ng-bind-html="item.htmlFormattedUrl"></div>
+		</div>
+
+	</a>
+</div>

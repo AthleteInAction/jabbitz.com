@@ -41,4 +41,10 @@ Rails.application.configure do
   # Splash Example IDs
   EIDS = [172,162,152]
 
+  # Google API Key
+  GKEY = 'AIzaSyDdVQb2QOVd3keNLy7SCnugVlYBojfh-R4'
+
+  # Google Custom Search CX
+  GCX = '001317505772620924739%3Aqpshzvvflnm'
+
 end

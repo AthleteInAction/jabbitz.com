@@ -18,10 +18,11 @@ AdminApp.config(['$httpProvider',function($httpProvider){
 // API
 // ======================================================================
 // ======================================================================
-angular.module('APIModule',['BlankModule','SocialModule','UserModule','ChimeModule'])
-.service('API',['BlankSVC','SocialSVC','ChimeSVC','UserSVC',function(BlankSVC,SocialSVC,ChimeSVC,UserSVC){
+angular.module('APIModule',['BlankModule','GoogleModule','SocialModule','UserModule','ChimeModule'])
+.service('API',['BlankSVC','GoogleSVC','SocialSVC','ChimeSVC','UserSVC',function(BlankSVC,GoogleSVC,SocialSVC,ChimeSVC,UserSVC){
 
 	// INSERT HERE
+	this.googles = GoogleSVC.googles;
 	this.socials = SocialSVC.socials;
 	this.chimes = ChimeSVC.chimes;
 	this.users = UserSVC.users;
