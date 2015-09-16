@@ -13,6 +13,7 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 		});
 		scope.chimes = API.chimes;
 		scope.socials = API.socials;
+		scope.googles = API.googles;
 
 		scope.getChimes = function(){
 
@@ -29,12 +30,23 @@ var PeopleShowCtrl = ['$scope','$routeParams','$location','$timeout','$interval'
 					scope.user = API.users.new(user);
 					scope.search = {limit: 10,order: '-id',user_id: scope.user.id};
 					scope.getChimes();
+					scope.getGoogles(scope.user.name)
 				}
 
 			});
 
 		};
 		scope.getUser();
+
+		scope.getGoogles = function(name){
+
+			scope.googles.get(name,function(){
+
+				JP(scope.googles.list);
+
+			});
+
+		};
 
 		JP('PEOPLESHOW');
 

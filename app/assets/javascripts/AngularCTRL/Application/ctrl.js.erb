@@ -25,7 +25,6 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 		scope.location = $location.path().split('/');
 
 		scope.users = API.users;
-		scope.googles = API.googles;
 
 		scope.search = {};
 
@@ -78,12 +77,6 @@ var Ctrl = ['$scope','$routeParams','$location','$timeout','$interval','API','$w
 					}
 					
 					track('send','event','Search','People',JSON.stringify({n: scope.users.list.length,v: tmp}),scope.users.list.length);
-
-				});
-
-				scope.googles.get(tmp.name,function(){
-
-					JP(scope.googles.list);
 
 				});
 
